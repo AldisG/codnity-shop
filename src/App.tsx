@@ -1,8 +1,14 @@
 import './App.scss';
 import LOGO from './img/react.png';
 import { Routes, Route } from 'react-router-dom';
-// import { useGetAnyDataQuery } from './store/services/storeApiCalls';
 import { motion } from 'framer-motion';
+import Home from './pages/Home';
+import StorePage from './pages/StorePage';
+import Contact from './pages/Contact';
+import Product from './pages/Product';
+import PageNotFound from './pages/PageNotFound';
+import NavigationBar from './components/navigation/NavigationBar';
+import NavigationModal from './components/navigation/NavigationModal';
 
 const test = {
   start: { opacity: 0 },
@@ -18,36 +24,18 @@ const App = () => {
       variants={test}
       initial={test.start}
       animate={test.end}
-      onClick={() => console.log('!')}
+      transition={{ duration: 1 }}
       className="App"
     >
-      <h1>{app}</h1>
-      <p>Working with: {process.env.NODE_ENV} webpack</p>
+      <NavigationBar />
+      {/* {openModal && <NavigationModal />} */}
+      <NavigationModal />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <hr />
-              <h3>This is displayed as a Route</h3>
-              <img className="logo" src={LOGO} alt={LOGO} width={200} />
-              <hr />
-              <ul>
-                <b>I contain :</b>
-                <li>React</li>
-                <li>TS</li>
-                <li>ReduxToolkit</li>
-                <li>React Testing Library and Jest</li>
-                <li>CreateApi</li>
-                <li>Framer Motion</li>
-                <li>ESLint</li>
-                <li>Prittier</li>
-                <li>Webpack</li>
-              </ul>
-              <hr />
-            </>
-          }
-        />
+        <Route path="/" element={<Home />} />
+        <Route path="/store" element={<StorePage />} />
+        <Route path="/store/product/:id" element={<Product />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </motion.div>
   );
