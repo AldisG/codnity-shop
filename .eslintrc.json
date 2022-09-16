@@ -1,0 +1,71 @@
+{
+	"env": {
+			"browser": true,
+			"es2021": true
+	},
+	"settings": {
+			"import/resolver": {
+					"node": {
+							"extensions": [
+									".js",
+									".jsx",
+									".ts",
+									".tsx"
+							]
+					}
+			}
+	},
+	"extends": [
+			"eslint:recommended",
+			"plugin:react/recommended",
+			"plugin:@typescript-eslint/recommended",
+			"prettier",
+			"plugin:prettier/recomended"
+
+	],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+			"ecmaFeatures": {
+					"jsx": true
+			},
+			"ecmaVersion": 2020,
+			"sourceType": "module"
+	},
+	"plugins": [
+			"@typescript-eslint"
+	],
+	"rules": {
+			"linebreak-style": 0,
+			"no-use-before-define": "off",
+			"@typescript-eslint/no-use-before-define": [
+					"error"
+			],
+			"react/button-has-type": "off",
+			"react/require-default-props": "off",
+			"jsx-a11y/no-static-element-interactions": "off",
+			"jsx-a11y/click-events-have-key-events": "off",
+			"no-unused-vars": "off",
+			"react/jsx-uses-react": "off",
+			"react/react-in-jsx-scope": "off",
+			"jsx-a11y/media-has-caption": "off",
+			"@typescript-eslint/explicit-module-boundary-types": "off",
+			"max-len": [
+					1,
+					{
+							"code": 120
+					}
+			],
+			"react/jsx-filename-extension": [
+					2,
+					{
+							"extensions": [
+									".js",
+									".jsx",
+									".ts",
+									".tsx"
+							]
+					}
+			]
+	}
+}
+// if errors on commits, delete husky, lintstaged and last line
