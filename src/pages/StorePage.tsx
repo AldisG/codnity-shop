@@ -1,7 +1,8 @@
 import React from 'react';
+import StoreItemList from '../components/store_page/StoreItemList';
 
 function StorePage() {
-  return <div>StorePage</div>;
+  return <StoreItemList />;
 }
 
 export default StorePage;

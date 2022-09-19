@@ -1,5 +1,4 @@
 import './App.scss';
-import LOGO from './img/react.png';
 import { Routes, Route } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Home from './pages/Home';
@@ -8,7 +7,6 @@ import Contact from './pages/Contact';
 import Product from './pages/Product';
 import PageNotFound from './pages/PageNotFound';
 import NavigationBar from './components/navigation/NavigationBar';
-import NavigationModal from './components/navigation/NavigationModal';
 
 const test = {
   start: { opacity: 0 },
@@ -16,9 +14,6 @@ const test = {
 };
 
 const App = () => {
-  // const { data, error, isLoading, isError } = useGetAnyDataQuery(undefined);
-  const app = 'app';
-
   return (
     <motion.div
       variants={test}
@@ -29,7 +24,6 @@ const App = () => {
     >
       <NavigationBar />
       {/* {openModal && <NavigationModal />} */}
-      <NavigationModal />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/store" element={<StorePage />} />
