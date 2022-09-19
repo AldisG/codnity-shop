@@ -1,11 +1,12 @@
-import { Button, Grid, Paper, Typography } from '@mui/material';
+import { Button, Grid, Paper, Tooltip, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Box } from '@mui/system';
-import { FC } from 'react';
+import React, { FC } from 'react';
 import InlineBox from '../utility/InlineBox';
 import { StoreItemType } from '../utility/types';
-import DescWrapper from './DescWrapper';
+import PriceInfoWrapper from './elements/PriceInfoWrapper';
 import Ratings from './elements/Ratings';
+import CustomizedTooltips from './elements/ShopItemTooltip';
 import ImageWrapper from './ImageWrapper';
 
 type Props = {
@@ -38,25 +39,28 @@ const StoreItem: FC<Props> = ({ item }) => {
       lg={3}
       sx={{ margin: 0, p: 2, pt: 4, border: '1px solid #333' }}
     >
-      <Item
-        sx={{
-          margin: 0,
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 1,
-        }}
-        key={id}
-      >
-        <Typography variant="h5" fontWeight="bold" component="div">
-          {title.slice(0, 20) + '...'}
-        </Typography>
+      <CustomizedTooltips title={title}>
+        {/* <Tooltip title={title} placement="top" arrow> */}
+        <Item
+          sx={{
+            margin: 0,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 1,
+          }}
+          key={id}
+        >
+          <Typography variant="h5" fontWeight="bold" component="div">
+            {title.slice(0, 25) + '...'}
+          </Typography>
 
-        <DescWrapper description={description} />
-        {/* Price, sale, sold out sections */}
+          {/* Price, sale, sold out sections */}
 
-        <ImageWrapper image={image} title={title} />
-        <Ratings rating={rating} />
-      </Item>
+          <ImageWrapper image={image} title={title} />
+          <Ratings rating={rating} />
+          <PriceInfoWrapper fakeNew={title.length} price={price} />
+        </Item>
+      </CustomizedTooltips>
     </Grid>
   );
 };
