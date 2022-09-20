@@ -1,8 +1,9 @@
 import { Grid, Paper } from '@mui/material';
 import { Box } from '@mui/system';
 import { useEffect } from 'react';
-import { useGetStoreItemsQuery } from '../../store/services/storeApiCalls';
-import { StoreItemType } from '../utility/types';
+import { useGetStoreItemsQuery } from '../../../store/services/storeApiCalls';
+import { StoreItemType } from '../../utility/types';
+import FilterWrapper from '../filter_components/FilterWrapper';
 import LoadingItems from './LoadingItems';
 import NoItemsToShow from './NoItemsToShow';
 import StoreItem from './StoreItem';
@@ -23,9 +24,7 @@ export const StoreItemList = () => {
 
   return (
     <Grid container>
-      <Grid item xs={12} md={2} display={{ xs: 'grid', md: 'flex' }}>
-        <Box>Sidebar stuff</Box>
-      </Grid>
+      <FilterWrapper />
 
       <Grid item xs={12} md={10}>
         <Grid container sx={{ margin: 0 }}>

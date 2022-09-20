@@ -13,7 +13,6 @@ const InlineBox: FC<P> = ({ children, wide, sx }) => {
         display: 'flex',
         alignItems: 'flex-start',
         justifyContent: wide ? 'space-between' : 'center',
-        gap: 2,
         textAlign: 'left',
         ...sx,
       }}

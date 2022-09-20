@@ -9,13 +9,18 @@ type P = {
 
 const ImageWrapper: FC<P> = ({ image, title }) => {
   return (
-    <Grid container width="100%" justifyContent="center">
-      <Grid item xs={6}>
-        <Box component="image" width="100%" maxWidth="100px" maxHeight="100px">
+    <Grid container justifyContent="center">
+      <Grid
+        item
+        maxHeight={{ xs: '200px', lg: '240px' }}
+        overflow="hidden"
+        xs={4}
+        md={8}
+      >
+        <Box component="image" maxWidth="100px">
           <img src={image} alt={title} />
         </Box>
       </Grid>
-      {/* ratings */}
     </Grid>
   );
 };
