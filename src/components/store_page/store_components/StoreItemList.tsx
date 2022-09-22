@@ -1,6 +1,6 @@
 import { Grid, Paper } from '@mui/material';
 import { Box } from '@mui/system';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useGetStoreItemsQuery } from '../../../store/services/storeApiCalls';
 import { StoreItemType } from '../../utility/types';
 import FilterWrapper from '../filter_components/FilterWrapper';
@@ -9,12 +9,20 @@ import NoItemsToShow from './NoItemsToShow';
 import StoreItem from './StoreItem';
 
 export const StoreItemList = () => {
-  const { data, error, isLoading, isError, isFetching } =
+  const { data, error, isLoading, isError, isFetching, isSuccess } =
     useGetStoreItemsQuery('');
   // add onRendered timer, to show loading item for 1s at least (no flashing items fix)
+  const dataFiltering = data?.length
+    ? data?.map((item: StoreItemType) => item.category)
+    : ([''] as string[]);
+
+  const filteredCategories = new Set<string[]>(Array.from(dataFiltering));
+  // @ts-ignore
+  const categories = ['all', ...filteredCategories];
+
   useEffect(() => {
-    console.log(data);
-  }, [data]);
+    console.log(categories);
+  }, [data, categories]);
 
   if (isLoading || isFetching) {
     return <LoadingItems />;
@@ -24,7 +32,7 @@ export const StoreItemList = () => {
 
   return (
     <Grid container>
-      <FilterWrapper />
+      <FilterWrapper categories={categories || ['']} />
 
       <Grid item xs={12} md={10}>
         <Grid container sx={{ margin: 0 }}>

@@ -1,19 +1,33 @@
-import { AppBar, Box, Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { FC } from 'react';
+import ArrangeWrapper from './ArrangeWrapper';
+import CategoryPadding from './CategoryPadding';
+import CategoryWrapper from './CategoryWrapper';
+import PriceRangeWrapper from './PriceRangeWrapper';
 
-type P = {};
+type P = {
+  categories: string[];
+};
 
-const FilterWrapper: FC<P> = ({}) => {
+const FilterWrapper: FC<P> = ({ categories }) => {
   return (
     <Grid
       item
       xs={12}
       md={2}
       display={{ xs: 'flex', md: 'grid' }}
-      height={{ xs: '50px', md: '100vh' }}
+      height="max-content"
+      // height={{ xs: '50px', md: '100vh' }}
     >
-      <Box sx={{ backgroundColor: '#ddd', width: '100%' }}>A</Box>
-      <Box sx={{ backgroundColor: '#eee', width: '100%' }}>B</Box>
+      <CategoryPadding>
+        <CategoryWrapper categories={categories} />
+      </CategoryPadding>
+      <CategoryPadding>
+        <ArrangeWrapper />
+      </CategoryPadding>
+      <CategoryPadding>
+        <PriceRangeWrapper />
+      </CategoryPadding>
     </Grid>
   );
 };

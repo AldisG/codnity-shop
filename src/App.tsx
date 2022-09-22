@@ -7,7 +7,6 @@ import Contact from './pages/Contact';
 import Product from './pages/Product';
 import PageNotFound from './pages/PageNotFound';
 import NavigationBar from './components/navigation/NavigationBar';
-import LoadingItems from './components/store_page/LoadingItems';
 
 const test = {
   start: { opacity: 0 },
@@ -24,8 +23,6 @@ const App = () => {
       className="App"
     >
       <NavigationBar />
-      {/* <LoadingItems /> */}
-      {/* {openModal && <NavigationModal />} */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/store" element={<StorePage />} />
