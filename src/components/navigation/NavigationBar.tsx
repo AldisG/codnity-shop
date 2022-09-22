@@ -18,7 +18,7 @@ const NavigationBar = () => {
           position: 'relative',
         }}
       >
-        <HamburgerMenu />
+        {/* Modal vieta izmantot <Drawer /> mui komponenti (perfect alternative) */}
         {modalIsOpen ? <NavigationButtons /> : <HamburgerMenu />}
         <Logo />
         <CartWrapper />
