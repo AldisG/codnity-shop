@@ -16,7 +16,7 @@ import CustomFilterForm from '../../utility/CustomFilterForm';
 const priceRanges = ['all', '0-20', '20-100', '100-1000'];
 
 const PriceRangeWrapper = () => {
-  const [priceRange, setPriceRange] = useState('');
+  const [priceRange, setPriceRange] = useState(priceRanges[0]);
 
   const handleChange = (event: SelectChangeEvent) => {
     setPriceRange(event.target.value);
@@ -34,7 +34,6 @@ const PriceRangeWrapper = () => {
         >
           {priceRanges.map((item, i: number) => (
             <FormControlLabel
-              defaultValue={priceRanges[0]}
               key={item}
               value={item}
               control={<Radio />}
