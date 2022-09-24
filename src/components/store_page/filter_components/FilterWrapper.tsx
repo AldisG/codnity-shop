@@ -1,4 +1,4 @@
-import { Box, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import { FC } from 'react';
 import ArrangeWrapper from './ArrangeWrapper';
 import CategoryPadding from './CategoryPadding';
@@ -9,6 +9,7 @@ type P = {
   categories: string[];
 };
 
+const mobileSpacers = { xs: 2, md: 0 };
 const FilterWrapper: FC<P> = ({ categories }) => {
   return (
     <Grid
@@ -16,8 +17,10 @@ const FilterWrapper: FC<P> = ({ categories }) => {
       xs={12}
       md={2}
       display={{ xs: 'flex', md: 'grid' }}
+      px={{ xs: 2, md: 0 }}
+      mb={{ xs: 2, md: 0 }}
       height="max-content"
-      // height={{ xs: '50px', md: '100vh' }}
+      gap={mobileSpacers}
     >
       <CategoryPadding>
         <CategoryWrapper categories={categories} />
@@ -31,7 +34,5 @@ const FilterWrapper: FC<P> = ({ categories }) => {
     </Grid>
   );
 };
-// <AppBar sx={{ left: 0, top: 'auto' }}>
-// </AppBar>
 
 export default FilterWrapper;

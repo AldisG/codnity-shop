@@ -6,7 +6,7 @@ import { openModal } from '../../store/slices/openModalSlice';
 const HamburgerMenu = () => {
   const dispatch = useAppDispatch();
   return (
-    <MenuItem onClick={() => dispatch(openModal())}>
+    <MenuItem value="menu" onClick={() => dispatch(openModal())}>
       <AiOutlineMenu />
     </MenuItem>
   );

@@ -8,6 +8,7 @@ const Logo = () => {
         position: 'absolute',
         right: '50%',
       }}
+      value="logo"
     >
       <Link to="/">Logo</Link>
     </MenuItem>

@@ -11,7 +11,7 @@ const NavigationBtn: FC<Props> = ({ link }) => {
   const { name, route } = link;
   return (
     <Link to={route}>
-      <MenuItem>
+      <MenuItem value={name}>
         <Typography>{name}</Typography>
       </MenuItem>
     </Link>

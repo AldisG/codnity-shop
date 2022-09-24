@@ -1,12 +1,12 @@
 import {
-  Box,
-  FormControl,
   InputLabel,
   MenuItem,
   Select,
   SelectChangeEvent,
+  Typography,
 } from '@mui/material';
 import { FC, useState } from 'react';
+import CustomFilterForm from '../../utility/CustomFilterForm';
 
 type P = {
   categories: string[];
@@ -21,20 +21,24 @@ const CategoryWrapper: FC<P> = ({ categories }) => {
   };
 
   return (
-    <FormControl variant="standard" fullWidth sx={{ backgroundColor: '#eee' }}>
-      <InputLabel id="select-category-label">Categories</InputLabel>
-      <Select
-        labelId="select-category-label"
-        id="select-category"
-        value={selectedCategory}
-        label="category"
-        onChange={handleChange}
-      >
-        {categories.map((category) => (
-          <MenuItem value={category}>{category}</MenuItem>
-        ))}{' '}
-      </Select>
-    </FormControl>
+    <CustomFilterForm>
+      <>
+        <InputLabel id="select-category-label">Categories</InputLabel>
+        <Select
+          labelId="select-category-label"
+          id="select-category"
+          value={selectedCategory}
+          label="category"
+          onChange={handleChange}
+        >
+          {categories.map((category) => (
+            <MenuItem value={category} key={category}>
+              <Typography>{category}</Typography>
+            </MenuItem>
+          ))}{' '}
+        </Select>
+      </>
+    </CustomFilterForm>
   );
 };
 

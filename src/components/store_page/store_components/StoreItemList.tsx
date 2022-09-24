@@ -1,5 +1,4 @@
-import { Grid, Paper } from '@mui/material';
-import { Box } from '@mui/system';
+import { Grid } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useGetStoreItemsQuery } from '../../../store/services/storeApiCalls';
 import { StoreItemType } from '../../utility/types';
