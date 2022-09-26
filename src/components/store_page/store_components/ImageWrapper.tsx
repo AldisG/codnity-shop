@@ -1,6 +1,7 @@
 import { Grid } from '@mui/material';
 import { Box } from '@mui/system';
 import { FC } from 'react';
+import { Image as IMG } from 'mui-image';
 
 type P = {
   image: string;
@@ -17,8 +18,8 @@ const ImageWrapper: FC<P> = ({ image, title }) => {
         xs={4}
         md={8}
       >
-        <Box component="image" maxWidth="100px">
-          <img src={image} alt={title} />
+        <Box maxWidth="100px">
+          <IMG src={image} alt={title} />
         </Box>
       </Grid>
     </Grid>
