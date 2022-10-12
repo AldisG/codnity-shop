@@ -11,7 +11,7 @@ const InlineBox: FC<P> = ({ children, wide, sx }) => {
     <Box
       sx={{
         display: 'flex',
-        alignItems: 'flex-start',
+        alignItems: 'center',
         justifyContent: wide ? 'space-between' : 'center',
         textAlign: 'left',
         ...sx,

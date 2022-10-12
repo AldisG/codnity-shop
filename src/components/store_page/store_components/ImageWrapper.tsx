@@ -11,15 +11,9 @@ type P = {
 const ImageWrapper: FC<P> = ({ image, title }) => {
   return (
     <Grid container justifyContent="center">
-      <Grid
-        item
-        maxHeight={{ xs: '200px', lg: '240px' }}
-        overflow="hidden"
-        xs={4}
-        md={8}
-      >
-        <Box maxWidth="100px">
-          <IMG src={image} alt={title} />
+      <Grid item maxHeight={{ xs: '200px', lg: '240px' }} xs={4} md={8}>
+        <Box maxWidth="100px" overflow="hidden" m="0 auto">
+          <img src={image} alt={title} />
         </Box>
       </Grid>
     </Grid>

@@ -1,7 +1,7 @@
-import React from 'react';
+import StoreProduct from '../components/store_product/StoreProduct';
 
 function Product() {
-  return <div>Product: if product not found - redirect to 404</div>;
+  return <StoreProduct />;
 }
 
 export default Product;
