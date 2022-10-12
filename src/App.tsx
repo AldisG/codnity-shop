@@ -7,6 +7,7 @@ import Contact from './pages/Contact';
 import Product from './pages/Product';
 import PageNotFound from './pages/PageNotFound';
 import NavigationBar from './components/navigation/NavigationBar';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const test = {
   start: { opacity: 0 },
