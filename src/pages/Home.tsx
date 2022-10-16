@@ -1,7 +1,7 @@
-import React from 'react';
+import HomeWrapper from '../components/home/HomeWrapper';
 
 function Home() {
-  return <div>Home</div>;
+  return <HomeWrapper />;
 }
 
 export default Home;
