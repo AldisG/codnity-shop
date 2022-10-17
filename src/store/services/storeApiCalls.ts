@@ -9,16 +9,15 @@ export const storeApi = createApi({
   }),
 
   endpoints: (builder) => ({
-    // getsomeData: builder.query({
-    //   query: (searchFor: string) =>
-    //     `my API link and ${searchFor} that i pass in` as string,
-    // }),
     getStoreItems: builder.query({
       query: () => 'products',
+    }),
+    getProductInfo: builder.query({
+      query: (searchId: string | number) => `products/${searchId}`,
     }),
   }),
 });
 
 export const { reducer } = storeApi;
-export const { useGetStoreItemsQuery } = storeApi;
+export const { useGetStoreItemsQuery, useGetProductInfoQuery } = storeApi;
 export default storeApi;

@@ -7,6 +7,8 @@ import PriceInfoWrapper from './PriceInfoWrapper';
 import Ratings from './Ratings';
 import ImageWrapper from './ImageWrapper';
 import CustomizedTooltips from '../elements/ShopItemTooltip';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 type Props = {
   item: StoreItemType;
@@ -27,6 +29,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const StoreItem: FC<Props> = ({ item }) => {
   const { category, description, id, image, price, rating, title } = item;
+
   const editedTitle = () => {
     const words = title.replace(',', ' ').split(' ');
     if (words.length > 4) {
@@ -48,28 +51,31 @@ const StoreItem: FC<Props> = ({ item }) => {
         pt: 4,
         justifyContent: 'center',
         outline: '1px solid #333',
+        cursor: 'pointer',
       }}
     >
       <CustomizedTooltips title={title}>
-        <Item
-          sx={{
-            margin: 0,
-            minheight: '100%',
-          }}
-          key={id}
-        >
-          <Box overflow="hidden">
-            <Typography variant="h5" fontWeight="bold" component="div" pb={2}>
-              {editedTitle()}
-            </Typography>
+        <Link to={'/store/' + id}>
+          <Item
+            sx={{
+              margin: 0,
+              minheight: '100%',
+            }}
+            key={id}
+          >
+            <Box overflow="hidden">
+              <Typography variant="h5" fontWeight="bold" component="div" pb={2}>
+                {editedTitle()}
+              </Typography>
 
-            <ImageWrapper image={image} title={title} />
-          </Box>
-          <Box sx={{ zIndex: 2 }}>
-            <PriceInfoWrapper fakeNew={title.length} price={price} />
-            <Ratings rating={rating} />
-          </Box>
-        </Item>
+              <ImageWrapper image={image} title={title} />
+            </Box>
+            <Box sx={{ zIndex: 2 }}>
+              <PriceInfoWrapper fakeNew={title.length} price={price} />
+              <Ratings rating={rating} />
+            </Box>
+          </Item>
+        </Link>
       </CustomizedTooltips>
     </Grid>
   );

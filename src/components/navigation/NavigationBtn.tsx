@@ -10,11 +10,11 @@ type Props = {
 const NavigationBtn: FC<Props> = ({ link }) => {
   const { name, route } = link;
   return (
-    <Link to={route}>
-      <MenuItem value={name}>
+    <MenuItem value={name}>
+      <Link to={route}>
         <Typography>{name}</Typography>
-      </MenuItem>
-    </Link>
+      </Link>
+    </MenuItem>
   );
 };
 
