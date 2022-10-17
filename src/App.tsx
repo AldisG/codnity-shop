@@ -7,7 +7,11 @@ import Contact from './pages/Contact';
 import Product from './pages/Product';
 import PageNotFound from './pages/PageNotFound';
 import NavigationBar from './components/navigation/NavigationBar';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+import { useEffect } from 'react';
+import { initiateStoreCall } from './store/slices/executeStoreCallsSlice';
+import { useAppDispatch, useAppSelector } from './store/redux/hooks';
+import { useGetStoreItemsQuery } from './store/services/storeApiCalls';
 
 const test = {
   start: { opacity: 0 },
@@ -15,6 +19,15 @@ const test = {
 };
 
 const App = () => {
+  // init store items this way, since useQuery cant be used in useEffect
+  // const dispatch = useAppDispatch();
+  // const fetcher = () => {
+  //   const { data, error, isLoading, isError, isFetching, isSuccess } =
+  //     useGetStoreItemsQuery('');
+  //   console.log(data);
+  // };
+  // fetcher();
+
   return (
     <motion.div
       variants={test}
@@ -27,7 +40,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/store" element={<StorePage />} />
-        <Route path="/store/product/:id" element={<Product />} />
+        <Route path="/store/:id" element={<Product />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
