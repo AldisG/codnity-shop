@@ -8,7 +8,7 @@
 
 // export default ContactForm
 
-import * as React from 'react';
+import { FC } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
@@ -33,7 +33,11 @@ const checkboxes = [
   },
 ];
 
-const ContactForm = () => {
+type P = {
+  setShowLoading: (value: boolean) => void;
+};
+
+const ContactForm: FC<P> = ({ setShowLoading }) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // if not all fields, setErrorText & return
@@ -49,44 +53,39 @@ const ContactForm = () => {
   };
 
   return (
-    <Container component="main" maxWidth="md">
-      <Box
-        sx={{
-          marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar> */}
-        <Typography component="h1" variant="h4">
-          Contact us
-        </Typography>
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-          <Grid container spacing={2}>
-            {inputNames.map((item, i: number) => (
-              <InputComponent key={item} inputName={item} index={i} />
-            ))}
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
+      <Typography component="h1" variant="h4">
+        Contact us
+      </Typography>
+      <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <Grid container spacing={2}>
+          {inputNames.map((item, i: number) => (
+            <InputComponent key={item} inputName={item} index={i} />
+          ))}
 
-            <Box sx={{ pl: 2, pt: 2 }}>
-              {checkboxes.map(({ label, value }) => (
-                <CheckboxComponent key={label} value={value} label={label} />
-              ))}
-            </Box>
-          </Grid>
-          <Button
-            type="submit"
-            variant="contained"
-            fullWidth
-            sx={{ mt: 3, mb: 2, py: 1.2 }}
-          >
-            Send Message
-          </Button>
-        </Box>
+          <Box sx={{ pl: 2, pt: 2 }}>
+            {checkboxes.map(({ label, value }) => (
+              <CheckboxComponent key={label} value={value} label={label} />
+            ))}
+          </Box>
+        </Grid>
+        <Button
+          type="submit"
+          variant="contained"
+          fullWidth
+          sx={{ mt: 3, mb: 2, py: 1.2 }}
+          onClick={() => setShowLoading(true)}
+        >
+          Send Message
+        </Button>
       </Box>
-    </Container>
+    </Box>
   );
 };
 export default ContactForm;
