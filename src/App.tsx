@@ -7,6 +7,7 @@ import Contact from './pages/Contact';
 import Product from './pages/Product';
 import PageNotFound from './pages/PageNotFound';
 import NavigationBar from './components/navigation/NavigationBar';
+
 import { useEffect } from 'react';
 import { initiateStoreCall } from './store/slices/executeStoreCallsSlice';
 import { useAppDispatch, useAppSelector } from './store/redux/hooks';
