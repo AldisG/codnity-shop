@@ -21,10 +21,13 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
   color: theme.palette.text.secondary,
   width: '100%',
+  height: 'max-cntent',
   borderRadius: '0',
   boxShadow: 'none',
   display: 'grid',
-  gridTemplateRows: '1fr .2fr',
+  gridTemplateRows: '.2fr 1fr .2fr',
+  alignItems: 'center',
+  gap: 2
 }));
 
 const StoreItem: FC<Props> = ({ item }) => {
@@ -49,34 +52,29 @@ const StoreItem: FC<Props> = ({ item }) => {
         margin: 0,
         p: 2,
         pt: 4,
-        justifyContent: 'center',
         outline: '1px solid #333',
         cursor: 'pointer',
       }}
     >
-      <CustomizedTooltips title={title}>
-        <Link to={'/store/' + id}>
-          <Item
-            sx={{
-              margin: 0,
-              minheight: '100%',
-            }}
-            key={id}
-          >
-            <Box overflow="hidden">
-              <Typography variant="h5" fontWeight="bold" component="div" pb={2}>
+      <Link to={'/store/' + id}>
+        <Box sx={{ minHeight: '100%' }}>
+          <CustomizedTooltips title={title}>
+            <Item key={id}>
+              <Typography variant="h5" fontWeight="bold" component="div">
                 {editedTitle()}
               </Typography>
 
-              <ImageWrapper image={image} title={title} />
-            </Box>
-            <Box sx={{ zIndex: 2 }}>
-              <PriceInfoWrapper fakeNew={title.length} price={price} />
-              <Ratings rating={rating} />
-            </Box>
-          </Item>
-        </Link>
-      </CustomizedTooltips>
+              {/* <Box overflow="hidden"> */}
+                <ImageWrapper image={image} title={title} />
+              {/* </Box> */}
+              <Box sx={{ zIndex: 2 }}>
+                <PriceInfoWrapper fakeNew={title.length} price={price} />
+                <Ratings rating={rating} />
+              </Box>
+            </Item>
+          </CustomizedTooltips>
+        </Box>
+      </Link>
     </Grid>
   );
 };
