@@ -8,31 +8,18 @@ import Product from './pages/Product';
 import PageNotFound from './pages/PageNotFound';
 import NavigationBar from './components/navigation/NavigationBar';
 
-import { useEffect } from 'react';
-import { initiateStoreCall } from './store/slices/executeStoreCallsSlice';
-import { useAppDispatch, useAppSelector } from './store/redux/hooks';
-import { useGetStoreItemsQuery } from './store/services/storeApiCalls';
-
-const test = {
+const initialLoad = {
   start: { opacity: 0 },
   end: { opacity: 1 },
 };
 
 const App = () => {
-  // init store items this way, since useQuery cant be used in useEffect
-  // const dispatch = useAppDispatch();
-  // const fetcher = () => {
-  //   const { data, error, isLoading, isError, isFetching, isSuccess } =
-  //     useGetStoreItemsQuery('');
-  //   console.log(data);
-  // };
-  // fetcher();
 
   return (
     <motion.div
-      variants={test}
-      initial={test.start}
-      animate={test.end}
+      variants={initialLoad}
+      initial={initialLoad.start}
+      animate={initialLoad.end}
       transition={{ duration: 1 }}
       className="App"
     >

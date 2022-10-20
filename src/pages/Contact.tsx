@@ -1,4 +1,4 @@
-import { Box, Container, Grid } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import { useState } from 'react';
 import ContactForm from '../components/contact/ContactForm';
 import ContactTexts from '../components/contact/ContactTexts';
@@ -6,7 +6,6 @@ import BackdropLoading from '../components/utility/BackdropLoading';
 
 const Contact = () => {
   const [showLoading, setShowLoading] = useState(false);
-  const handleFakeLoading = () => {};
 
   return (
     <Container maxWidth="xl" sx={{ py: 4, mt: 8 }}>

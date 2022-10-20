@@ -8,17 +8,13 @@
 
 // export default ContactForm
 
-import { FC } from 'react';
-import Avatar from '@mui/material/Avatar';
+import { FC, useState } from 'react';
 import Button from '@mui/material/Button';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import InputComponent from './InputComponent';
 import CheckboxComponent from './CheckboxComponent';
-import { FormControl, TextField } from '@mui/material';
 
 const inputNames = ['First Name', 'Last Name', 'Email Address', 'Message'];
 const checkboxes = [
@@ -38,19 +34,15 @@ type P = {
 };
 
 const ContactForm: FC<P> = ({ setShowLoading }) => {
+  const [messageSubmitted, setMessageSubmitted] = useState(false);
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // if not all fields, setErrorText & return
-    const data = new FormData(event.currentTarget);
-    console.log({
-      fName: data.get('firstname'),
-      lName: data.get('lastname'),
-      email: data.get('emailaddress'),
-      message: data.get('message'),
-      consent: data.get('consent'),
-      spam: data.get('allowextraemails'),
-    });
+    setMessageSubmitted(true);
+    setShowLoading(true);
   };
+
+  const resetSubmissionBoolean = () => setMessageSubmitted(false);
 
   return (
     <Box
@@ -60,13 +52,19 @@ const ContactForm: FC<P> = ({ setShowLoading }) => {
         alignItems: 'center',
       }}
     >
-      <Typography component="h1" variant="h4">
+      <Typography component="h1" variant="h2" fontSize={54} fontWeight="bold">
         Contact us
       </Typography>
-      <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+      <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
         <Grid container spacing={2}>
           {inputNames.map((item, i: number) => (
-            <InputComponent key={item} inputName={item} index={i} />
+            <InputComponent
+              key={item}
+              inputName={item}
+              index={i}
+              messageSubmitted={messageSubmitted}
+              resetSubmissionBoolean={resetSubmissionBoolean}
+            />
           ))}
 
           <Box sx={{ pl: 2, pt: 2 }}>
@@ -79,8 +77,12 @@ const ContactForm: FC<P> = ({ setShowLoading }) => {
           type="submit"
           variant="contained"
           fullWidth
-          sx={{ mt: 3, mb: 2, py: 1.2 }}
-          onClick={() => setShowLoading(true)}
+          sx={{
+            mt: 3,
+            mb: 2,
+            py: 1.2,
+          }}
+          // onClick={() => setShowLoading(true)}
         >
           Send Message
         </Button>
