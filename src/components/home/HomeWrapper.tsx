@@ -5,7 +5,7 @@ import SectionTwo from './SectionTwo';
 
 const HomeWrapper = () => {
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" >
       <SectionOne />
       <SectionTwo />
     </Container>
