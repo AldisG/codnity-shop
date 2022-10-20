@@ -16,7 +16,11 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 const BackdropLoading: FC<P> = ({ showLoading, setShowLoading }) => {
   const [showSnackbar, setShowSnackbar] = useState(false);
   useEffect(() => {
-    const timer = setTimeout(() => setShowLoading(false), 1500);
+    
+    const timer = setTimeout(() => {
+      setShowLoading(false)
+      setShowSnackbar(true);
+    }, 1100);
     timer;
     return () => {
       clearTimeout(timer);
@@ -24,13 +28,15 @@ const BackdropLoading: FC<P> = ({ showLoading, setShowLoading }) => {
   }, [showLoading]);
 
   return (
-    <Backdrop
-      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-      open={showLoading}
-    >
-      <CircularProgress color="inherit" />
-      <Snackbar
+    <>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={showLoading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+      <Snackbar
+        open={showSnackbar}
         autoHideDuration={6000}
         onClose={() => setShowSnackbar(false)}
       >
@@ -39,10 +45,10 @@ const BackdropLoading: FC<P> = ({ showLoading, setShowLoading }) => {
           severity="success"
           sx={{ width: '100%' }}
         >
-          This is a success message!
+          Email has been sent successfully!
         </Alert>
       </Snackbar>
-    </Backdrop>
+    </>
   );
 };
 
