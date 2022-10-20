@@ -1,5 +1,5 @@
 import { Grid } from '@mui/material';
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import { useGetStoreItemsQuery } from '../../../store/services/storeApiCalls';
 import { StoreItemType } from '../../utility/types';
 import FilterWrapper from '../filter_components/FilterWrapper';
@@ -18,10 +18,6 @@ export const StoreItemList = () => {
   const filteredCategories = new Set<string[]>(Array.from(dataFiltering));
   // @ts-ignore
   const categories = ['all', ...filteredCategories];
-
-  useEffect(() => {
-    console.log(categories);
-  }, [data, categories]);
 
   if (isLoading || isFetching) {
     return <LoadingItems />;
