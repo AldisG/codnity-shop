@@ -7,6 +7,8 @@ import Contact from './pages/Contact';
 import Product from './pages/Product';
 import PageNotFound from './pages/PageNotFound';
 import NavigationBar from './components/navigation/NavigationBar';
+import Footer from './components/footer/Footer';
+import { Box } from '@mui/system';
 
 const initialLoad = {
   start: { opacity: 0 },
@@ -14,7 +16,6 @@ const initialLoad = {
 };
 
 const App = () => {
-
   return (
     <motion.div
       variants={initialLoad}
@@ -24,13 +25,16 @@ const App = () => {
       className="App"
     >
       <NavigationBar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/store" element={<StorePage />} />
-        <Route path="/store/:id" element={<Product />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
+      <Box sx={{ minHeight: '95vh' }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/store" element={<StorePage />} />
+          <Route path="/store/:id" element={<Product />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </Box>
+      <Footer />
     </motion.div>
   );
 };
