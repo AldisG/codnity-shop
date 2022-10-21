@@ -33,7 +33,7 @@ const ProductNotFound: FC = () => {
       >
         Sorry, the item does not exist.
       </Typography>
-      <ImageWrapper image={ProductNotFoundIcon} title="product not found" />
+      <ImageWrapper image={ProductNotFoundIcon} title="product not found" large={true} />
       <LargeBtn onClick={() => navigate(-1)} txt="go back" />
     </Box>
   );

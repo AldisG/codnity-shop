@@ -1,14 +1,14 @@
 import { Grid } from '@mui/material';
 import { Box } from '@mui/system';
 import { FC } from 'react';
-import { Image as IMG } from 'mui-image';
 
 type P = {
   image: string;
   title: string;
+  large?: boolean;
 };
 
-const ImageWrapper: FC<P> = ({ image, title }) => {
+const ImageWrapper: FC<P> = ({ image, title, large }) => {
   return (
     <Grid container justifyContent="center" overflow="hidden">
       <Grid
@@ -22,7 +22,7 @@ const ImageWrapper: FC<P> = ({ image, title }) => {
       >
         <Box
           m="0 auto"
-          height="200px"
+          height={large ? '' : '200px'}
           sx={{ display: 'grid', alignItems: 'center' }}
         >
           <img src={image} alt={title} />

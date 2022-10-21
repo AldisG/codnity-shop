@@ -1,16 +1,16 @@
-import { Button, Grid, Typography } from '@mui/material';
+import { Button, Container, Grid, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import { FC, useState, useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useGetProductInfoQuery } from '../../store/services/storeApiCalls';
-import ImageWrapper from '../store_page/store_components/ImageWrapper';
 import LoadingItems from '../store_page/store_components/LoadingItems';
 import Ratings from '../store_page/store_components/Ratings';
 import { formatedNumb } from '../utility/formatPrice';
 import LargeBtn from '../utility/LargeBtn';
 import { StoreItemType } from '../utility/types';
-import ProductNotFoundIcon from '../../img/no-content.png';
 import ProductNotFound from './ProductNotFound';
+import ChooseAmount from './ChooseAmount';
+import { BsArrowLeft } from 'react-icons/bs';
 
 const StoreProduct = () => {
   const [product, setProduct] = useState<StoreItemType>({
@@ -44,8 +44,11 @@ const StoreProduct = () => {
   const { category, description, image, price, rating, title } = product;
 
   return (
-    <Box>
-      <Button onClick={() => navigate(-1)}>Go back</Button>
+    <Container maxWidth="lg" sx={{ mt: 4 }}>
+      <Button onClick={() => navigate(-1)} sx={{ display: 'flex', gap: 1 }}>
+        <BsArrowLeft size={16} />
+        <Typography>Go back</Typography>
+      </Button>
       <Grid container sx={{ width: '100%' }}>
         <Grid item xs={12} md={6} mt={5} gap={2}>
           <Box sx={{ width: { xs: '35%', md: '50%' }, margin: '0 auto' }}>
@@ -76,7 +79,7 @@ const StoreProduct = () => {
             >
               {description}
             </Typography>
-            {/* Choose the available amount, 1-10 */}
+            <ChooseAmount />
             <LargeBtn txt="ADD TO CART" />
             <Typography variant="body2" fontWeight={500}>
               Category: <b>{category}</b>
@@ -84,7 +87,7 @@ const StoreProduct = () => {
           </Box>
         </Grid>
       </Grid>
-    </Box>
+    </Container>
   );
 };
 

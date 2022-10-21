@@ -7,7 +7,6 @@ import PriceInfoWrapper from './PriceInfoWrapper';
 import Ratings from './Ratings';
 import ImageWrapper from './ImageWrapper';
 import CustomizedTooltips from '../elements/ShopItemTooltip';
-import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 type Props = {
@@ -27,11 +26,11 @@ const Item = styled(Paper)(({ theme }) => ({
   display: 'grid',
   gridTemplateRows: '.2fr 1fr .2fr',
   alignItems: 'center',
-  gap: 2
+  gap: 2,
 }));
 
 const StoreItem: FC<Props> = ({ item }) => {
-  const { category, description, id, image, price, rating, title } = item;
+  const { id, image, price, rating, title } = item;
 
   const editedTitle = () => {
     const words = title.replace(',', ' ').split(' ');
@@ -40,6 +39,7 @@ const StoreItem: FC<Props> = ({ item }) => {
     }
     return `${words.join(' ')}.`;
   };
+
   return (
     <Grid
       item
@@ -63,10 +63,7 @@ const StoreItem: FC<Props> = ({ item }) => {
               <Typography variant="h5" fontWeight="bold" component="div">
                 {editedTitle()}
               </Typography>
-
-              {/* <Box overflow="hidden"> */}
-                <ImageWrapper image={image} title={title} />
-              {/* </Box> */}
+              <ImageWrapper image={image} title={title} />
               <Box sx={{ zIndex: 2 }}>
                 <PriceInfoWrapper fakeNew={title.length} price={price} />
                 <Ratings rating={rating} />
