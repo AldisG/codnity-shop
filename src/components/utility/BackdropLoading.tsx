@@ -1,6 +1,7 @@
 import { Backdrop, CircularProgress, Snackbar } from '@mui/material';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
+
 type P = {
   showLoading: boolean;
   setShowLoading: (value: boolean) => void;
@@ -15,17 +16,19 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 
 const BackdropLoading: FC<P> = ({ showLoading, setShowLoading }) => {
   const [showSnackbar, setShowSnackbar] = useState(false);
-  useEffect(() => {
-    
+  const startSnackbarTimer = () => {
     const timer = setTimeout(() => {
-      setShowLoading(false)
+      setShowLoading(false);
       setShowSnackbar(true);
     }, 1100);
     timer;
     return () => {
       clearTimeout(timer);
     };
-  }, [showLoading]);
+  };
+  if (showLoading === true) {
+    startSnackbarTimer();
+  }
 
   return (
     <>
@@ -37,7 +40,7 @@ const BackdropLoading: FC<P> = ({ showLoading, setShowLoading }) => {
       </Backdrop>
       <Snackbar
         open={showSnackbar}
-        autoHideDuration={6000}
+        autoHideDuration={5000}
         onClose={() => setShowSnackbar(false)}
       >
         <Alert

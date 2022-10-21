@@ -1,13 +1,3 @@
-// import React from 'react'
-
-// const ContactForm = () => {
-//   return (
-//     <div>ContactForm</div>
-//   )
-// }
-
-// export default ContactForm
-
 import { FC, useState } from 'react';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
@@ -82,7 +72,6 @@ const ContactForm: FC<P> = ({ setShowLoading }) => {
             mb: 2,
             py: 1.2,
           }}
-          // onClick={() => setShowLoading(true)}
         >
           Send Message
         </Button>

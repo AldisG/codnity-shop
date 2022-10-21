@@ -1,5 +1,4 @@
 import { Grid } from '@mui/material';
-// import { useEffect, useState } from 'react';
 import { useGetStoreItemsQuery } from '../../../store/services/storeApiCalls';
 import { StoreItemType } from '../../utility/types';
 import FilterWrapper from '../filter_components/FilterWrapper';
@@ -8,9 +7,8 @@ import NoItemsToShow from './NoItemsToShow';
 import StoreItem from './StoreItem';
 
 export const StoreItemList = () => {
-  const { data, error, isLoading, isError, isFetching, isSuccess } =
+  const { data, isLoading, isError, isFetching } =
     useGetStoreItemsQuery('');
-  // add onRendered timer, to show loading item for 1s at least (no flashing items fix)
   const dataFiltering = data?.length
     ? data?.map((item: StoreItemType) => item.category)
     : ([''] as string[]);
