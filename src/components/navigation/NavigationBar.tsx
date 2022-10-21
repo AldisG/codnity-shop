@@ -1,4 +1,4 @@
-import { AppBar, Box, MenuItem } from '@mui/material';
+import { AppBar, Box } from '@mui/material';
 import NavigationButtons from './NavigationButtons';
 import HamburgerMenu from './HamburgerMenu';
 import Logo from '../utility/Logo';
@@ -12,8 +12,11 @@ const NavigationBar = () => {
     <AppBar position="static">
       <Box
         sx={{
-          display: 'flex',
+          display: 'grid',
+          gridTemplateColumns: modalIsOpen ? '.2fr 1fr .5fr' : '1fr .2fr',
+          // gridTemplateColumns: { xs: '1fr .2fr', md: '.2fr 1fr .5fr'},
           justifyContent: 'space-between',
+          justifyItems: 'flex-end',
           width: '100%',
           position: 'relative',
         }}
