@@ -1,13 +1,68 @@
 import { TableBody, TableCell, TableRow } from '@mui/material';
 
 const CartTableBody = () => {
-  const cartItems: any[] | null = [];
+  const cartItems: any[] | null = [
+    {
+      productName: 'Spoon',
+      price: '99',
+      category: 'kitchen',
+      amount: '1',
+    },
+    {
+      productName: 'Spoon',
+      price: '99',
+      category: 'kitchen',
+      amount: '1',
+    },
+    {
+      productName: 'Spoon',
+      price: '99',
+      category: 'kitchen',
+      amount: '1',
+    },
+    {
+      productName: 'Spoon',
+      price: '99',
+      category: 'kitchen',
+      amount: '1',
+    },
+    {
+      productName: 'Spoon',
+      price: '99',
+      category: 'kitchen',
+      amount: '1',
+    },
+    {
+      productName: 'Spoon',
+      price: '99',
+      category: 'kitchen',
+      amount: '1',
+    },
+    {
+      productName: 'Spoon',
+      price: '99',
+      category: 'kitchen',
+      amount: '1',
+    },
+    {
+      productName: 'Spoon',
+      price: '99',
+      category: 'kitchen',
+      amount: '1',
+    },
+    {
+      productName: 'Spoon',
+      price: '99',
+      category: 'kitchen',
+      amount: '1',
+    },
+  ];
 
   return (
     <TableBody>
-      {cartItems?.map((row) => (
+      {cartItems?.map((row, i) => (
         <TableRow
-          key={row.productName}
+          key={`${row.productName}${i}`}
           sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
         >
           <TableCell component="th" scope="row">

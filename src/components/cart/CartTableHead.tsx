@@ -3,6 +3,7 @@ import {
   TableCell,
   TableHead,
   TableRow,
+  Typography,
 } from '@mui/material';
 import { Box } from '@mui/system';
 import CartTableBody from './CartTableBody';
@@ -10,12 +11,7 @@ import NoItemsAtCart from './NoItemsAtCart';
 
 const CartTableHead = () => {
   const cartItemCount = 3;
-  const tableHeadContent = [
-    "Product name",
-    "Price",
-    "Category",
-    "Amount",
-  ]
+  const tableHeadContent = ['Product name', 'Price', 'Category', 'Amount'];
   if (!cartItemCount) {
     return <NoItemsAtCart />;
   }
@@ -25,7 +21,9 @@ const CartTableHead = () => {
         <TableHead>
           <TableRow>
             {tableHeadContent.map((it, i: number) => (
-              <TableCell align={!i ? 'left' : 'right'} >{it}</TableCell>
+              <TableCell align={!i ? 'left' : 'right'}>
+                <Typography fontWeight="bold">{it}</Typography>
+              </TableCell>
             ))}
           </TableRow>
         </TableHead>

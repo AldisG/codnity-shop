@@ -10,6 +10,7 @@ import {
 import { Box } from '@mui/system';
 import { FC, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
+import ActionButton from '../utility/ActionButton';
 import CloseButton from '../utility/CloseButton';
 import CartTableHead from './CartTableHead';
 
@@ -31,10 +32,20 @@ const CartComponent: FC<P> = ({ cartOpen, setcartOpen }) => {
           sx={{
             overflowY: 'auto',
             maxHeight: '300px',
-            pb: 4
+            py: 1,
+            backgroundColor: '#dddddd33',
           }}
         >
           <CartTableHead />
+        </Box>
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <Typography component="div" pt={2}>
+            Total <b>{99}</b>$
+          </Typography>
+        </Box>
+
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <ActionButton text="Purchase" />
         </Box>
       </DialogContent>
     </Dialog>
