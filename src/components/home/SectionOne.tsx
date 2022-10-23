@@ -8,15 +8,16 @@ const SectionOne = () => {
   return (
     <Box
       sx={{
-        display: 'flex',
+        display: { xs: 'grid', md: 'flex' },
         alignItems: 'center',
         justifyContent: 'center',
         gap: 1,
-        minHeight: '95vh',
+        height: '580px',
         position: 'relative',
+        p: 1,
       }}
     >
-      <Box sx={{ maxWidth: '450px', textAlign: 'center' }}>
+      <Box sx={{ maxWidth: '450px', textAlign: 'center', px: 2 }}>
         <Typography
           variant="h2"
           component="div"
@@ -42,13 +43,17 @@ const SectionOne = () => {
         <ActionButton text="Start shopping!" />
       </Box>
       <DecorBox />
-      <Box sx={{ width: '550px', alignSelf: 'flex-end' }}>
-        <CardMedia
-          component="img"
-          image={ShoppingGirl}
-          alt="Come and shop with us!"
-          title="Come and shop with us!"
-        />
+      <Box
+        sx={{ width: '550px', position: 'relative', alignSelf: 'flex-start' }}
+      >
+        <Box sx={{ position: 'absolute', top: 100, right: 0 }}>
+          <CardMedia
+            component="img"
+            image={ShoppingGirl}
+            alt="Come and shop with us!"
+            title="Come and shop with us!"
+          />
+        </Box>
       </Box>
     </Box>
   );
