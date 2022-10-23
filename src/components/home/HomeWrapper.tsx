@@ -4,7 +4,7 @@ import SectionOne from './SectionOne';
 
 const HomeWrapper = () => {
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" >
       <SectionOne />
     </Container>
   );
