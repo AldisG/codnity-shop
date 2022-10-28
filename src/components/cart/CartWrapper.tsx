@@ -1,4 +1,4 @@
-import { Avatar, MenuItem, Typography } from '@mui/material';
+import { Avatar, Button, MenuItem, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { BsCart3, BsCartFill } from 'react-icons/bs';
 import CartComponent from './CartComponent';
@@ -10,9 +10,10 @@ const CartWrapper = () => {
 
   return (
     <Box>
-      <MenuItem
-        value="cart items"
-        sx={{ display: 'flex' }}
+      <Button
+        variant="text"
+        aria-label="Check your shopping cart"
+        sx={{ display: 'flex', color: '#fff', py: 0.2 }}
         onClick={() => {
           console.log('clicked');
           setcartOpen(true);
@@ -40,7 +41,7 @@ const CartWrapper = () => {
             <BsCart3 size={25} />
           )}
         </Box>
-      </MenuItem>
+      </Button>
       <CartComponent cartOpen={cartOpen} setcartOpen={setcartOpen} />
     </Box>
   );

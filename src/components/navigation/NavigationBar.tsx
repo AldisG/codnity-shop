@@ -4,28 +4,31 @@ import HamburgerMenu from './HamburgerMenu';
 import Logo from '../utility/Logo';
 import CartWrapper from '../cart/CartWrapper';
 import { useAppSelector } from '../../store/redux/hooks';
+import { Container } from '@mui/system';
 
 const NavigationBar = () => {
   const modalIsOpen = useAppSelector(({ openModal }) => openModal.openModal);
 
   return (
     <AppBar position="static">
-      <Box
-        sx={{
-          display: 'grid',
-          gridTemplateColumns: modalIsOpen ? '.2fr 1fr .5fr' : '1fr .2fr',
-          // gridTemplateColumns: { xs: '1fr .2fr', md: '.2fr 1fr .5fr'},
-          justifyContent: 'space-between',
-          justifyItems: 'flex-end',
-          width: '100%',
-          position: 'relative',
-        }}
-      >
-        {/* Modal vieta izmantot <Drawer /> mui komponenti (perfect alternative) */}
-        {modalIsOpen ? <NavigationButtons /> : <HamburgerMenu />}
-        <Logo />
-        <CartWrapper />
-      </Box>
+      <Container maxWidth="xl">
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: modalIsOpen ? '.5fr 1fr .5fr' : '1fr .2fr',
+            justifyContent: 'space-between',
+            justifyItems: 'flex-end',
+            alignItems: 'center',
+            width: '100%',
+            position: 'relative',
+          }}
+        >
+          {/* Modal vieta izmantot <Drawer /> mui komponenti (perfect alternative) */}
+          {modalIsOpen ? <NavigationButtons /> : <HamburgerMenu />}
+          <Logo />
+          <CartWrapper />
+        </Box>
+      </Container>
     </AppBar>
   );
 };

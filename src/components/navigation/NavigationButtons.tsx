@@ -4,7 +4,7 @@ import NavigationBtn from './NavigationBtn';
 
 const NavigationButtons = () => {
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', justifySelf: 'flex-start' }}>
       {linkNames.map((link) => (
         <NavigationBtn key={link.name} link={link} />
       ))}

@@ -11,7 +11,13 @@ import NoItemsAtCart from './NoItemsAtCart';
 
 const CartTableHead = () => {
   const cartItemCount = 3;
-  const tableHeadContent = ['Product name', 'Price', 'Category', 'Amount'];
+  const tableHeadContent = [
+    'Product name',
+    'Price',
+    'Category',
+    'Amount',
+    'Remove',
+  ];
   if (!cartItemCount) {
     return <NoItemsAtCart />;
   }
@@ -21,8 +27,10 @@ const CartTableHead = () => {
         <TableHead>
           <TableRow>
             {tableHeadContent.map((it, i: number) => (
-              <TableCell align={!i ? 'left' : 'right'}>
-                <Typography fontWeight="bold">{it}</Typography>
+              <TableCell key={it + i} align={!i ? 'left' : 'right'}>
+                <Typography key={it} fontWeight="bold">
+                  {it}
+                </Typography>
               </TableCell>
             ))}
           </TableRow>
