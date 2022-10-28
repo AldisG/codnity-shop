@@ -18,7 +18,7 @@ const DecorBox: FC<P> = ({ children }) => {
           'linear-gradient(90deg, rgba(68,1,112,1) 0%, rgba(171,0,177,1) 50%, rgba(69,252,248,1) 100%)',
         boxShadow: '2px 8px 8px #33333366',
         mt: 6,
-        gap: {xs: 10, md: 1},
+        gap: { xs: 10, md: 1 },
         py: 4,
         zIndex: -10,
       }}
