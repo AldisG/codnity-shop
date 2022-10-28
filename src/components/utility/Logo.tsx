@@ -1,17 +1,17 @@
-import { MenuItem } from '@mui/material';
+import { Box, MenuItem, Typography } from '@mui/material';
+import { AiFillShopping } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 
 const Logo = () => {
   return (
-    <MenuItem
+    <Box
       sx={{
-        position: 'absolute',
-        right: '50%',
+        pointerEvents: 'none',
+        justifySelf: 'center'
       }}
-      value="logo"
     >
-      <Link to="/">Logo</Link>
-    </MenuItem>
+      <AiFillShopping size={38} />
+    </Box>
   );
 };
 

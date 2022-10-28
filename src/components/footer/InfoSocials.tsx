@@ -23,8 +23,8 @@ const InfoSocials = () => {
       </Typography>
       <Box sx={{ display: 'flex', gap: 1 }}>
         {icons.map((It, i: number) => (
-          <Box>
-            <a key={i} href="https://www.google.com">
+          <Box key={i}>
+            <a href="https://www.google.com">
               <It size={40} color="#ddd" />
             </a>
           </Box>

@@ -14,6 +14,7 @@ import { BsArrowLeft } from 'react-icons/bs';
 
 const StoreProduct = () => {
   const [product, setProduct] = useState<StoreItemType>({
+    // amountavailable
     category: '',
     description: '',
     id: 0,
@@ -28,11 +29,12 @@ const StoreProduct = () => {
   );
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (data && isSuccess) {
-      setProduct(data);
-    }
-  }, [data]);
+  const handleAddToCart = () =>
+    useEffect(() => {
+      if (data && isSuccess) {
+        setProduct(data);
+      }
+    }, [data]);
 
   if (isLoading) {
     return <LoadingItems />;

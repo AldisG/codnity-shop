@@ -1,4 +1,4 @@
-import { MenuItem, Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 type Props = {
@@ -10,11 +10,11 @@ type Props = {
 const NavigationBtn: FC<Props> = ({ link }) => {
   const { name, route } = link;
   return (
-    <MenuItem value={name}>
-      <Link to={route}>
+    <Link to={route}>
+      <Button variant="text" sx={{ color: '#fff' }}>
         <Typography>{name}</Typography>
-      </Link>
-    </MenuItem>
+      </Button>
+    </Link>
   );
 };
 

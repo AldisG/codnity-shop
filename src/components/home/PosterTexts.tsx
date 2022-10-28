@@ -41,7 +41,7 @@ const PosterTexts = () => {
       >
         Some main subtitle text of mini description and stuff
       </Typography>
-      <ActionButton text="Start shopping!" />
+      <ActionButton text="Start shopping!" goTo="/store" />
     </Box>
   );
 };
