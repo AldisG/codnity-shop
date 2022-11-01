@@ -1,11 +1,14 @@
 import { Button, ButtonGroup, TextField, Typography } from '@mui/material';
-import { useState } from 'react';
+import { FC, useState } from 'react';
+
+type P = {
+  amount: number;
+  setamount: (n: number) => void;
+};
 
 const maxAmount = 10;
 
-const ChooseAmount = () => {
-  const [amount, setamount] = useState(1);
-
+const ChooseAmount: FC<P> = ({ amount, setamount }) => {
   const handleAddAmount = () => {
     amount < maxAmount ? setamount(amount + 1) : setamount(maxAmount);
   };

@@ -11,13 +11,7 @@ import NoItemsAtCart from './NoItemsAtCart';
 
 const CartTableHead = () => {
   const cartItemCount = 3;
-  const tableHeadContent = [
-    'Product name',
-    'Price',
-    'Category',
-    'Amount',
-    'Remove',
-  ];
+  const tableHeadContent = ['Product name', 'Price', 'Amount', 'Remove'];
   if (!cartItemCount) {
     return <NoItemsAtCart />;
   }

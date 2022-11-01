@@ -1,6 +1,7 @@
 import { Backdrop, CircularProgress, Snackbar } from '@mui/material';
 import React, { FC, useState } from 'react';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import SnackBarUniversal from './SnackBarUniversal';
 
 type P = {
   showLoading: boolean;
@@ -38,19 +39,11 @@ const BackdropLoading: FC<P> = ({ showLoading, setShowLoading }) => {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
-      <Snackbar
-        open={showSnackbar}
-        autoHideDuration={5000}
-        onClose={() => setShowSnackbar(false)}
-      >
-        <Alert
-          onClose={() => setShowSnackbar(false)}
-          severity="success"
-          sx={{ width: '100%' }}
-        >
-          Email has been sent successfully!
-        </Alert>
-      </Snackbar>
+      <SnackBarUniversal
+        text="Email has been sent successfully!"
+        showSnackbar={showSnackbar}
+        setShowSnackbar={setShowSnackbar}
+      />
     </>
   );
 };

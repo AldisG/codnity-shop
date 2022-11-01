@@ -3,12 +3,14 @@ import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import openModal from '../slices/openModalSlice';
 import storeApi from '../services/storeApiCalls';
 import executeStoreCall from '../slices/executeStoreCallsSlice';
+import cartProductsSlice from '../slices/cartProductsSlice';
 
 const store = configureStore({
   reducer: {
     [storeApi.reducerPath]: storeApi.reducer,
     openModal: openModal,
     executeStoreCall: executeStoreCall,
+    cartProductsSlice: cartProductsSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(storeApi.middleware),

@@ -2,12 +2,12 @@ import { Grid, Paper, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Box } from '@mui/system';
 import { FC } from 'react';
-import { StoreItemType } from '../../utility/types';
 import PriceInfoWrapper from './PriceInfoWrapper';
 import Ratings from './Ratings';
 import ImageWrapper from './ImageWrapper';
 import CustomizedTooltips from '../elements/ShopItemTooltip';
 import { Link } from 'react-router-dom';
+import { StoreItemType } from '../../../store/types';
 
 type Props = {
   item: StoreItemType;

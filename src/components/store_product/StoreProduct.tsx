@@ -1,49 +1,65 @@
-import { Button, Container, Grid, Typography } from '@mui/material';
-import { Box } from '@mui/system';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useGetProductInfoQuery } from '../../store/services/storeApiCalls';
+import { useAppDispatch } from '../../store/redux/hooks';
+import { Button, Container, Grid, Typography } from '@mui/material';
+import { Box } from '@mui/system';
 import LoadingItems from '../store_page/store_components/LoadingItems';
 import Ratings from '../store_page/store_components/Ratings';
 import { formatedNumb } from '../utility/formatPrice';
 import LargeBtn from '../utility/LargeBtn';
-import { StoreItemType } from '../utility/types';
+import { StoreItemType } from '../../store/types';
 import ProductNotFound from './ProductNotFound';
 import ChooseAmount from './ChooseAmount';
 import { BsArrowLeft } from 'react-icons/bs';
+import { addItemsToCart } from '../../store/slices/cartProductsSlice';
+import SnackBarUniversal from '../utility/SnackBarUniversal';
 
 const StoreProduct = () => {
-  const [product, setProduct] = useState<StoreItemType>({
-    // amountavailable
-    category: '',
-    description: '',
-    id: 0,
-    image: '',
-    price: 0,
-    rating: { rate: 0, count: 0 },
-    title: '',
-  });
   const { id } = useParams();
+
   const { data, isLoading, isSuccess, isError } = useGetProductInfoQuery(
     id || ''
   );
+
+  const [amount, setamount] = useState(1);
+  const [showSnackbar, setShowSnackbar] = useState(false);
+
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
-  const handleAddToCart = () =>
-    useEffect(() => {
-      if (data && isSuccess) {
-        setProduct(data);
-      }
-    }, [data]);
-
-  if (isLoading) {
+  if (isLoading && !data) {
     return <LoadingItems />;
   }
 
-  if (isError || !data) {
+  if (isError || !isSuccess || !data) {
     return <ProductNotFound />;
   }
-  const { category, description, image, price, rating, title } = product;
+
+  const {
+    category,
+    description,
+    image,
+    price,
+    rating,
+    title,
+    id: ID,
+  } = data as StoreItemType;
+
+  const handleAddToCart = () => {
+    dispatch(
+      addItemsToCart({
+        amount,
+        id: ID,
+        price,
+        title,
+      })
+    );
+    if (amount > 2) {
+      setamount(1);
+    }
+    setShowSnackbar(true);
+  };
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>
@@ -81,14 +97,19 @@ const StoreProduct = () => {
             >
               {description}
             </Typography>
-            <ChooseAmount />
-            <LargeBtn txt="ADD TO CART" />
+            <ChooseAmount amount={amount} setamount={setamount} />
+            <LargeBtn txt="ADD TO CART" onClick={handleAddToCart} />
             <Typography variant="body2" fontWeight={500}>
               Category: <b>{category}</b>
             </Typography>
           </Box>
         </Grid>
       </Grid>
+      <SnackBarUniversal
+        text="Item added to your cart"
+        showSnackbar={showSnackbar}
+        setShowSnackbar={setShowSnackbar}
+      />
     </Container>
   );
 };

@@ -6,56 +6,16 @@ import {
   Typography,
 } from '@mui/material';
 import { useState } from 'react';
+import { useAppSelector } from '../../store/redux/hooks';
 
 const CartTableBody = () => {
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      productName: 'Spoon',
-      price: '99',
-      category: 'kitchen',
-      amount: '1',
-    },
-    {
-      id: 2,
-      productName: 'Spoon',
-      price: '99',
-      category: 'kitchen',
-      amount: '1',
-    },
-    {
-      id: 3,
-      productName: 'Spoon',
-      price: '99',
-      category: 'kitchen',
-      amount: '1',
-    },
-    {
-      id: 4,
-      productName: 'Spoon',
-      price: '99',
-      category: 'kitchen',
-      amount: '1',
-    },
-    {
-      id: 5,
-      productName: 'Spoon',
-      price: '99',
-      category: 'kitchen',
-      amount: '1',
-    },
-    {
-      id: 6,
-      productName: 'Spoon',
-      price: '99',
-      category: 'kitchen',
-      amount: '1',
-    },
-  ]);
+  const userCartContents = useAppSelector(
+    ({ cartProductsSlice }) => cartProductsSlice.userCart
+  );
 
   return (
     <TableBody>
-      {cartItems.length === 0 && (
+      {userCartContents.length === 0 && (
         <TableRow>
           <TableCell align="right">
             <Typography variant="h5" textAlign="left">
@@ -64,24 +24,25 @@ const CartTableBody = () => {
           </TableCell>
         </TableRow>
       )}
-      {cartItems?.map((row, i) => (
+      {userCartContents?.map((row, i) => (
         <TableRow
-          key={`${row.productName}${i}`}
+          key={`${row.title}${i}`}
           sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
         >
           <TableCell component="th" scope="row">
-            {row.productName}
+            {row.title}
           </TableCell>
           <TableCell align="right">{row.price}</TableCell>
-          <TableCell align="right">{row.category}</TableCell>
           <TableCell align="right">{row.amount}</TableCell>
           <TableCell align="right">
             {/* ITEM options/edit entry */}
             <Button
               variant="text"
               size="small"
-              onClick={() =>
-                setCartItems((prev) => prev.filter((it) => it.id !== row.id))
+              onClick={
+                () => ''
+                // setCartItems((prev) => prev.filter((it) => it.id !== row.id))
+                // dispatch taisit, filter
               }
               sx={{
                 color: '#333',

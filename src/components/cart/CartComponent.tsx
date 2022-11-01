@@ -10,6 +10,7 @@ import {
 import { Box } from '@mui/system';
 import { FC, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
+import { useAppSelector } from '../../store/redux/hooks';
 import ActionButton from '../utility/ActionButton';
 import CloseButton from '../utility/CloseButton';
 import CartTableHead from './CartTableHead';
@@ -36,6 +37,10 @@ const handlePurchaseItems = () => {
 };
 
 const CartComponent: FC<P> = ({ cartOpen, setcartOpen }) => {
+  const userCartContents = useAppSelector(
+    ({ cartProductsSlice }) => cartProductsSlice.userCart
+  );
+  console.log(userCartContents);
   return (
     <Dialog onClose={() => setcartOpen(false)} open={cartOpen} maxWidth="xl">
       <CloseButton setcartOpen={setcartOpen} />
@@ -65,7 +70,7 @@ const CartComponent: FC<P> = ({ cartOpen, setcartOpen }) => {
         </Box>
 
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <ActionButton text="delete items" lowAccent={true} caution={true} />
+          <ActionButton text="remove all" lowAccent={true} caution={true} />
           <ActionButton text="Purchase" simpleFunc={handlePurchaseItems} />
         </Box>
       </DialogContent>
