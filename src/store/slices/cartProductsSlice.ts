@@ -15,12 +15,18 @@ const cartProductsSlice = createSlice({
       { payload }: { payload: CartItem }
     ) => {
       // later add: if item exists, update amount only
-      console.log('user cart: ', userCart);
-      console.log('user payload: ', payload);
       userCart.push(payload);
+    },
+    removeAnItem: (
+      { userCart }: { userCart: CartItem[] },
+      { payload }: { payload: number }
+    ) => {
+      console.log('userCart', userCart);
+      console.log('payload', payload);
+      userCart = userCart.filter((item) => item.id !== payload);
     },
   },
 });
 
-export const { addItemsToCart } = cartProductsSlice.actions;
+export const { addItemsToCart, removeAnItem } = cartProductsSlice.actions;
 export default cartProductsSlice.reducer;

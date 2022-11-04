@@ -6,13 +6,14 @@ import {
   Typography,
 } from '@mui/material';
 import { useState } from 'react';
-import { useAppSelector } from '../../store/redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/redux/hooks';
+import { removeAnItem } from '../../store/slices/cartProductsSlice';
 
 const CartTableBody = () => {
   const userCartContents = useAppSelector(
     ({ cartProductsSlice }) => cartProductsSlice.userCart
   );
-
+  const dispatch = useAppDispatch();
   return (
     <TableBody>
       {userCartContents.length === 0 && (
@@ -40,7 +41,11 @@ const CartTableBody = () => {
               variant="text"
               size="small"
               onClick={
-                () => ''
+                () => {
+                  dispatch(removeAnItem(row.id));
+                  console.log('row id', row.id);
+                  console.log(userCartContents);
+                }
                 // setCartItems((prev) => prev.filter((it) => it.id !== row.id))
                 // dispatch taisit, filter
               }
