@@ -3,17 +3,17 @@ import { FC, useState } from 'react';
 
 type P = {
   amount: number;
-  setamount: (n: number) => void;
+  setAmount: (n: number) => void;
 };
 
 const maxAmount = 10;
 
-const ChooseAmount: FC<P> = ({ amount, setamount }) => {
+const ChooseAmount: FC<P> = ({ amount, setAmount }) => {
   const handleAddAmount = () => {
-    amount < maxAmount ? setamount(amount + 1) : setamount(maxAmount);
+    amount < maxAmount ? setAmount(amount + 1) : setAmount(maxAmount);
   };
   const handleSubtractAmount = () => {
-    amount <= 1 ? setamount(1) : setamount(amount - 1);
+    amount > 1 ?  setAmount(amount - 1) : setAmount(1);
   };
 
   return (
@@ -21,7 +21,7 @@ const ChooseAmount: FC<P> = ({ amount, setamount }) => {
       <Button
         variant="outlined"
         onClick={handleSubtractAmount}
-        disabled={amount === 1}
+        disabled={amount <= 1}
       >
         <Typography variant="h4" component="p" sx={{ mt: -1 }}>
           -

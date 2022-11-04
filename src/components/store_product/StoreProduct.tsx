@@ -22,7 +22,7 @@ const StoreProduct = () => {
     id || ''
   );
 
-  const [amount, setamount] = useState(1);
+  const [amount, setAmount] = useState(1);
   const [showSnackbar, setShowSnackbar] = useState(false);
 
   const navigate = useNavigate();
@@ -55,8 +55,8 @@ const StoreProduct = () => {
         title,
       })
     );
-    if (amount > 2) {
-      setamount(1);
+    if (amount > 1) {
+      setAmount(1);
     }
     setShowSnackbar(true);
   };
@@ -97,7 +97,7 @@ const StoreProduct = () => {
             >
               {description}
             </Typography>
-            <ChooseAmount amount={amount} setamount={setamount} />
+            <ChooseAmount amount={amount} setAmount={setAmount} />
             <LargeBtn txt="ADD TO CART" onClick={handleAddToCart} />
             <Typography variant="body2" fontWeight={500}>
               Category: <b>{category}</b>

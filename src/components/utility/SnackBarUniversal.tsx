@@ -5,9 +5,15 @@ type P = {
   text: string;
   showSnackbar: boolean;
   setShowSnackbar: (value: boolean) => void;
+  caution?: boolean;
 };
 
-const SnackBarUniversal: FC<P> = ({ text, showSnackbar, setShowSnackbar }) => {
+const SnackBarUniversal: FC<P> = ({
+  text,
+  showSnackbar,
+  setShowSnackbar,
+  caution,
+}) => {
   return (
     <Snackbar
       open={showSnackbar}
@@ -16,7 +22,7 @@ const SnackBarUniversal: FC<P> = ({ text, showSnackbar, setShowSnackbar }) => {
     >
       <Alert
         onClose={() => setShowSnackbar(false)}
-        severity="success"
+        severity={caution ? 'warning' : 'success'}
         sx={{ width: '100%' }}
       >
         {text}
