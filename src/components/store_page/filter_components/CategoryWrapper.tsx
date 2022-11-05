@@ -5,18 +5,23 @@ import {
   SelectChangeEvent,
   Typography,
 } from '@mui/material';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import CustomFilterForm from '../../utility/CustomFilterForm';
 
 type P = {
   categories: string[];
+  selectedCategory: string;
+  setSelectedCategory: (value: string) => void;
 };
 
-const CategoryWrapper: FC<P> = ({ categories }) => {
-  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
-
+const CategoryWrapper: FC<P> = ({
+  categories,
+  selectedCategory,
+  setSelectedCategory,
+}) => {
   const handleChange = (event: SelectChangeEvent) => {
-    setSelectedCategory(event.target.value);
+    const value = event.target.value
+    setSelectedCategory(value);
     // fire displayCategory event from store (create it)
   };
 

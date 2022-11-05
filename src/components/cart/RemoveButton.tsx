@@ -5,9 +5,10 @@ import { removeAnItem } from '../../store/slices/cartProductsSlice';
 
 type P = {
   itemId: number;
+  onClick?: () => void;
 };
 
-const RemoveButton: FC<P> = ({ itemId }) => {
+const RemoveButton: FC<P> = ({ itemId, onClick }) => {
   const dispatch = useAppDispatch();
   return (
     <Button
@@ -15,6 +16,7 @@ const RemoveButton: FC<P> = ({ itemId }) => {
       size="small"
       onClick={() => {
         dispatch(removeAnItem(itemId));
+        onClick && onClick();
       }}
       sx={{
         color: '#333',

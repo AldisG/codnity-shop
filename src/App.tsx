@@ -6,9 +6,14 @@ import StorePage from './pages/StorePage';
 import Contact from './pages/Contact';
 import Product from './pages/Product';
 import PageNotFound from './pages/PageNotFound';
+import { useEffect } from 'react';
 import NavigationBar from './components/navigation/NavigationBar';
 import Footer from './components/footer/Footer';
 import { Box } from '@mui/system';
+import { useAppDispatch } from './store/redux/hooks';
+import { StoreItemType } from './store/types';
+import { useGetStoreItemsQuery } from './store/services/storeApiCalls';
+import { setStoreProducts } from './store/slices/storeProductsSlice';
 
 const initialLoad = {
   start: { opacity: 0 },
@@ -16,6 +21,29 @@ const initialLoad = {
 };
 
 const App = () => {
+  const dispatch = useAppDispatch();
+
+  const { data, isSuccess, isLoading, isError, isFetching } =
+    useGetStoreItemsQuery('');
+
+  useEffect(() => {
+    if (isSuccess) {
+      const storeItems = data.map((item: StoreItemType) => ({
+        ...item,
+        totalAmount: 10,
+      })) as StoreItemType[];
+      dispatch(
+        setStoreProducts({
+          data: storeItems,
+          isLoading,
+          isSuccess,
+          isError,
+          isFetching,
+        })
+      );
+    }
+  }, [data]);
+
   return (
     <motion.div
       variants={initialLoad}

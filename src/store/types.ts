@@ -1,3 +1,11 @@
+export type StoreItemsFetchCall = {
+  data: StoreItemType[];
+  isLoading: boolean;
+  isSuccess: boolean;
+  isError: boolean;
+  isFetching: boolean;
+};
+
 export type StoreItemType = {
   category: string;
   description: string;
@@ -7,6 +15,7 @@ export type StoreItemType = {
   rating: { rate: number; count: number };
   title: string;
 };
+
 export type CartItem = {
   id: number;
   title: string;

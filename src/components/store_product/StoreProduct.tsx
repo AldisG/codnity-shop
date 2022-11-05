@@ -95,7 +95,7 @@ const StoreProduct = () => {
               fontSize={18}
               fontWeight={500}
             >
-              {description}
+            {description}
             </Typography>
             <ChooseAmount amount={amount} setAmount={setAmount} />
             <LargeBtn txt="ADD TO CART" onClick={handleAddToCart} />

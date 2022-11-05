@@ -1,19 +1,17 @@
-import { Button, ButtonGroup, TextField, Typography } from '@mui/material';
-import { FC, useState } from 'react';
+import { Button, ButtonGroup, Typography } from '@mui/material';
+import { FC } from 'react';
 
 type P = {
   amount: number;
   setAmount: (n: number) => void;
 };
 
-const maxAmount = 10;
-
 const ChooseAmount: FC<P> = ({ amount, setAmount }) => {
   const handleAddAmount = () => {
-    amount < maxAmount ? setAmount(amount + 1) : setAmount(maxAmount);
+    setAmount(amount + 1);
   };
   const handleSubtractAmount = () => {
-    amount > 1 ?  setAmount(amount - 1) : setAmount(1);
+    amount > 1 ? setAmount(amount - 1) : setAmount(1);
   };
 
   return (
@@ -44,7 +42,7 @@ const ChooseAmount: FC<P> = ({ amount, setAmount }) => {
       <Button
         variant="outlined"
         onClick={handleAddAmount}
-        disabled={amount === maxAmount}
+        disabled={amount > 10}
       >
         <Typography variant="h4" component="p">
           +

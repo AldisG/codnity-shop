@@ -4,6 +4,7 @@ import openModal from '../slices/openModalSlice';
 import storeApi from '../services/storeApiCalls';
 import executeStoreCall from '../slices/executeStoreCallsSlice';
 import cartProductsSlice from '../slices/cartProductsSlice';
+import storeProductsSlice from '../slices/storeProductsSlice';
 
 const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
     openModal: openModal,
     executeStoreCall: executeStoreCall,
     cartProductsSlice: cartProductsSlice,
+    storeProductsSlice: storeProductsSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(storeApi.middleware),
