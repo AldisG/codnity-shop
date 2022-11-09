@@ -10,20 +10,10 @@ export const StoreItemList = () => {
   const storeData = useAppSelector(
     ({ storeProductsSlice }) => storeProductsSlice.storeProductList
   );
-  const {
-    data: storeItems,
-    isError,
-    isLoading,
-    isFetching,
-  } = storeData;
-
-  const dataFiltering = storeItems?.length
-    ? storeItems?.map((item: StoreItemType) => item.category)
-    : ([''] as string[]);
-  // @ts-ignore
-  const filteredCategories = new Set<string[]>(Array.from(dataFiltering));
-  // @ts-ignore
-  const categories = ['all', ...filteredCategories];
+  const filteredStoreData = useAppSelector(
+    ({ storeProductsSlice }) => storeProductsSlice.filteredData
+  );
+  const { data: storeItems, isError, isLoading, isFetching } = storeData;
 
   if (isLoading || isFetching) {
     return <LoadingItems />;
@@ -31,12 +21,15 @@ export const StoreItemList = () => {
     return <NoItemsToShow />;
   }
 
+  const chooseStoreDataArray =
+    filteredStoreData.length === 0 ? storeItems : filteredStoreData;
+
   return (
     <Grid container>
-      <FilterWrapper categories={categories || ['']} />
+      <FilterWrapper />
       <Grid item xs={12} md={10}>
         <Grid container sx={{ margin: 0 }}>
-          {storeItems.map((item: StoreItemType) => {
+          {chooseStoreDataArray.map((item: StoreItemType) => {
             return <StoreItem key={item.id} item={item} />;
           })}
         </Grid>

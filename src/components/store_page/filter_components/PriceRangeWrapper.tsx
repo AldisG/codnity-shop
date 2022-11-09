@@ -1,4 +1,5 @@
 import {
+  Box,
   FormControlLabel,
   InputLabel,
   MenuItem,
@@ -7,8 +8,7 @@ import {
   Select,
   SelectChangeEvent,
 } from '@mui/material';
-import { Box } from '@mui/system';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import CustomFilterForm from '../../utility/CustomFilterForm';
 
 type P = {
@@ -28,7 +28,7 @@ const PriceRangeWrapper: FC<P> = ({
   };
   return (
     <>
-      <InputLabel id="select-category-label">Categories</InputLabel>
+      <InputLabel id="select-category-label" sx={{ display: { xs: 'none', md: 'block' } }}>Price range</InputLabel>
       <CustomFilterForm>
         <RadioGroup
           sx={{ display: { xs: 'none', md: 'grid' } }}
@@ -46,6 +46,27 @@ const PriceRangeWrapper: FC<P> = ({
             />
           ))}
         </RadioGroup>
+      </CustomFilterForm>
+
+      <CustomFilterForm>	
+        <Box display={{ xs: 'grid', md: 'none' }}>	
+          <InputLabel id="controlled-radio-buttons-group">	
+            Price ranges	
+          </InputLabel>	
+          <Select	
+            labelId="select-category-label"	
+            id="select-category"	
+            value={priceRange}	
+            label="category"	
+            onChange={handleChange}	
+          >	
+            {priceRanges.map((item) => (	
+              <MenuItem key={item} value={item} sx={{ width: '100%' }}>	
+                {item}	
+              </MenuItem>	
+            ))}	
+          </Select>	
+        </Box>	
       </CustomFilterForm>
     </>
   );

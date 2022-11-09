@@ -6,7 +6,7 @@ const EmptyTableRow = () => {
       <TableRow>
         <TableCell align="right">
           <Typography variant="h5" textAlign="left">
-            You don't have any items in cart yet.
+            You don't have any items in cart
           </Typography>
         </TableCell>
       </TableRow>

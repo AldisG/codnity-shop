@@ -1,14 +1,11 @@
 import { Grid } from '@mui/material';
-import { FC, useState } from 'react';
+import { useState } from 'react';
+import { categories } from '../../utility/categories';
 import { convertSelectValueToString } from '../../utility/convertSelectValueToString';
 import ArrangeWrapper from './ArrangeWrapper';
 import CategoryPadding from './CategoryPadding';
 import CategoryWrapper from './CategoryWrapper';
 import PriceRangeWrapper from './PriceRangeWrapper';
-
-type P = {
-  categories: string[];
-};
 
 const priceRanges = ['all', '0-20', '20-100', '100-1000'];
 const arangeByOptions = [
@@ -24,8 +21,8 @@ const defaultArrangeOptionsValue = convertSelectValueToString(
 
 const mobileScreenSpacing = { xs: 2, md: 0 };
 
-const FilterWrapper: FC<P> = ({ categories }) => {
-  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+const FilterWrapper = () => {
+  const [selectedCategory, setSelectedCategory] = useState(categories[0].name);
   const [changeOrder, setchangeOrder] = useState(defaultArrangeOptionsValue);
   const [priceRange, setPriceRange] = useState(priceRanges[0]);
 
@@ -42,7 +39,7 @@ const FilterWrapper: FC<P> = ({ categories }) => {
     >
       <CategoryPadding>
         <CategoryWrapper
-          categories={categories}
+          // categories={categories}
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
         />
