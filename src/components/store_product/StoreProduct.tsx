@@ -75,11 +75,12 @@ const StoreProduct = () => {
         </Grid>
         <Grid item xs={12} md={6} p={4}>
           <Box sx={{ display: 'grid', gap: 2 }}>
-            <Typography component="div" variant="h5" fontWeight={900}>
-              $ {formatedNumb(price)}
-            </Typography>
+            {/* atsevisks typography components ar switch logiku, pec ka nosaka, kadu stilu likt? */}
             <Typography component="div" variant="h3" fontWeight={700}>
               {title}
+            </Typography>
+            <Typography component="div" variant="h5" fontWeight={900}>
+              $ {formatedNumb(price)}
             </Typography>
             <Box
               sx={{
@@ -95,7 +96,7 @@ const StoreProduct = () => {
               fontSize={18}
               fontWeight={500}
             >
-            {description}
+              {description}
             </Typography>
             <ChooseAmount amount={amount} setAmount={setAmount} />
             <LargeBtn txt="ADD TO CART" onClick={handleAddToCart} />

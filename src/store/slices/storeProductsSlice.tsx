@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { categories } from '../../components/utility/categories';
-import { useGetStoreItemsQuery } from '../services/storeApiCalls';
+import { BsReverseLayoutSidebarInsetReverse } from 'react-icons/bs';
+import { categories } from '../../components/utility/options';
 import { StoreItemType } from '../types';
 
 type InitialStoreCall = {
@@ -40,7 +40,6 @@ const storeProductsSlice = createSlice({
       { payload }: { payload: string }
     ) => {
       const changeStoreState = (payload: string) => {
-        // const storeCopy = [...state.data] // doesnt reset, need a safe, resettable copy
         state.isDirty = true;
         state.filteredData = state.data.filter(
           (item) => item.category === payload
@@ -69,15 +68,16 @@ const storeProductsSlice = createSlice({
       }
     },
     setProductPriceRange: (state, { payload }: { payload: string }) => {
-      console.log('payload: ', payload);
-      const [from, to] = payload.split('/').map((value) => Number(value));
-      // if dirty, show what data, filtered or all?
-      if (payload === 'all') {
+      if (payload === 'all' || !payload) {
         state.filteredData = state.data;
+        return;
       }
+      const [from, to] = payload.split('-').map((value) => Number(value));
+      // if dirty, show what data, filtered or all?
 
-      state.filteredData = state.data.filter((item) => {
-        return item.price <= from && item.price <= to;
+      // ja liek data, tad tas sava zinja visus parejos options reseto, lai gan opcijas paliek tadas pasas
+      state.filteredData = state.filteredData.filter((item) => {
+        return item.price >= from && item.price <= to;
       });
     },
   },

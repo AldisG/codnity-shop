@@ -5,6 +5,7 @@ import LoadingItems from './LoadingItems';
 import NoItemsToShow from './NoItemsToShow';
 import StoreItem from './StoreItem';
 import { useAppSelector } from '../../../store/redux/hooks';
+import StoreContentWrapper from './StoreContentWrapper';
 
 export const StoreItemList = () => {
   const { isError, isLoading, isFetching } = useAppSelector(
@@ -13,27 +14,28 @@ export const StoreItemList = () => {
   const storeItems = useAppSelector(
     ({ storeProductsSlice }) => storeProductsSlice.filteredData
   );
-
+  console.log(storeItems);
   if (isLoading || isFetching) {
     return <LoadingItems />;
   } else if (isError || !storeItems || storeItems.length == 0) {
-    return <NoItemsToShow />;
+    return (
+      <StoreContentWrapper>
+        <NoItemsToShow />
+      </StoreContentWrapper>
+    );
   }
 
   const chooseStoreDataArray =
     storeItems.length === 0 ? storeItems : storeItems;
 
   return (
-    <Grid container>
-      <FilterWrapper />
-      <Grid item xs={12} md={10}>
-        <Grid container sx={{ margin: 0 }}>
-          {chooseStoreDataArray.map((item: StoreItemType) => {
-            return <StoreItem key={item.id} item={item} />;
-          })}
-        </Grid>
+    <StoreContentWrapper>
+      <Grid container sx={{ margin: 0 }}>
+        {chooseStoreDataArray.map((item: StoreItemType) => {
+          return <StoreItem key={item.id} item={item} />;
+        })}
       </Grid>
-    </Grid>
+    </StoreContentWrapper>
   );
 };
 

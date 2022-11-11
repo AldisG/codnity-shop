@@ -5,11 +5,10 @@ import {
   SelectChangeEvent,
   Typography,
 } from '@mui/material';
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import { useAppDispatch } from '../../../store/redux/hooks';
 import { changeDisplayedItemsByCategory } from '../../../store/slices/storeProductsSlice';
-import { categories } from '../../utility/categories';
-import { convertSelectValueToString } from '../../utility/convertSelectValueToString';
+import { categories } from '../../utility/options';
 import CustomFilterForm from '../../utility/CustomFilterForm';
 
 const CategoryWrapper = () => {
