@@ -1,40 +1,56 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { categories } from '../../components/utility/categories';
-import { StoreItemsFetchCall, StoreItemType } from '../types';
+import { useGetStoreItemsQuery } from '../services/storeApiCalls';
+import { StoreItemType } from '../types';
+
+type InitialStoreCall = {
+  data: StoreItemType[];
+  isError: boolean;
+  isLoading: boolean;
+  isSuccess: boolean;
+  isFetching: boolean;
+};
 
 const initialState = {
-  storeProductList: {
-    data: [] as StoreItemType[],
-    isError: false,
-    isLoading: true,
-    isSuccess: false,
-    isFetching: true,
-  } as StoreItemsFetchCall,
-  filteredData: [] as StoreItemType[]
+  data: [] as StoreItemType[], // serves as fallback
+  isError: false,
+  isLoading: true,
+  isSuccess: false,
+  isFetching: true,
+  filteredData: [] as StoreItemType[],
+  isDirty: false,
 };
 
 const storeProductsSlice = createSlice({
   name: 'storeProductsSlice',
   initialState,
   reducers: {
-    setStoreProducts: (
-      store,
-      {
-        payload,
-      }: {
-        payload: StoreItemsFetchCall;
-      }
-    ) => {
-      store.storeProductList = payload;
+    initiateStoreCall: (state, { payload }: { payload: InitialStoreCall }) => {
+      state.data = payload.data ? payload.data : [];
+      state.filteredData = payload.data ? payload.data : [];
+
+      state.isError = payload.isError;
+      state.isLoading = payload.isLoading;
+      state.isSuccess = payload.isSuccess;
+      state.isFetching = payload.isFetching;
     },
-    changeActiveCategory: (state, { payload }: { payload: string }) => {
+
+    changeDisplayedItemsByCategory: (
+      state,
+      { payload }: { payload: string }
+    ) => {
       const changeStoreState = (payload: string) => {
-        // const storeCopy = [...state.storeProductList.data] // doesnt reset, need a safe, resettable copy
-        state.filteredData = state.storeProductList.data.filter((item) => item.category === payload)
+        // const storeCopy = [...state.data] // doesnt reset, need a safe, resettable copy
+        state.isDirty = true;
+        state.filteredData = state.data.filter(
+          (item) => item.category === payload
+        );
       };
       switch (payload) {
         case categories[0].name:
-          changeStoreState(categories[0].label);
+          // set it to original items array
+          state.filteredData = state.data;
+          state.isDirty = false;
           break;
         case categories[1].name:
           changeStoreState(categories[1].label);
@@ -52,9 +68,24 @@ const storeProductsSlice = createSlice({
           break;
       }
     },
+    setProductPriceRange: (state, { payload }: { payload: string }) => {
+      console.log('payload: ', payload);
+      const [from, to] = payload.split('/').map((value) => Number(value));
+      // if dirty, show what data, filtered or all?
+      if (payload === 'all') {
+        state.filteredData = state.data;
+      }
+
+      state.filteredData = state.data.filter((item) => {
+        return item.price <= from && item.price <= to;
+      });
+    },
   },
 });
 
-export const { setStoreProducts, changeActiveCategory } =
-  storeProductsSlice.actions;
+export const {
+  initiateStoreCall,
+  changeDisplayedItemsByCategory,
+  setProductPriceRange,
+} = storeProductsSlice.actions;
 export default storeProductsSlice.reducer;

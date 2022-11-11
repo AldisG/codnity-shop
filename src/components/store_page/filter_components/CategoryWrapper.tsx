@@ -5,26 +5,22 @@ import {
   SelectChangeEvent,
   Typography,
 } from '@mui/material';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useAppDispatch } from '../../../store/redux/hooks';
-import { changeActiveCategory } from '../../../store/slices/storeProductsSlice';
+import { changeDisplayedItemsByCategory } from '../../../store/slices/storeProductsSlice';
 import { categories } from '../../utility/categories';
+import { convertSelectValueToString } from '../../utility/convertSelectValueToString';
 import CustomFilterForm from '../../utility/CustomFilterForm';
 
-type P = {
-  selectedCategory: string;
-  setSelectedCategory: (value: string) => void;
-};
+const CategoryWrapper = () => {
+  const [selectedCategory, setSelectedCategory] = useState(categories[0].name);
 
-const CategoryWrapper: FC<P> = ({
-  selectedCategory,
-  setSelectedCategory,
-}) => {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
+
   const handleChange = (event: SelectChangeEvent) => {
-    const value = event.target.value
+    const value = event.target.value;
     setSelectedCategory(value);
-    dispatch(changeActiveCategory(value))
+    dispatch(changeDisplayedItemsByCategory(value));
   };
 
   return (
@@ -38,7 +34,7 @@ const CategoryWrapper: FC<P> = ({
           label="category"
           onChange={handleChange}
         >
-          {categories.map(({label, name}) => (
+          {categories.map(({ label, name }) => (
             <MenuItem value={name} key={name}>
               <Typography>{label}</Typography>
             </MenuItem>

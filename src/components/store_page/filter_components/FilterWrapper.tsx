@@ -22,10 +22,10 @@ const defaultArrangeOptionsValue = convertSelectValueToString(
 const mobileScreenSpacing = { xs: 2, md: 0 };
 
 const FilterWrapper = () => {
-  const [selectedCategory, setSelectedCategory] = useState(categories[0].name);
+  // const [selectedCategory, setSelectedCategory] = useState(categories[0].name);
   const [changeOrder, setchangeOrder] = useState(defaultArrangeOptionsValue);
   const [priceRange, setPriceRange] = useState(priceRanges[0]);
-
+  // parrent component doesnt need to pass down def and arrays..? tpt viss caur store iet, seit nekos netiek editots
   return (
     <Grid
       item
@@ -39,9 +39,8 @@ const FilterWrapper = () => {
     >
       <CategoryPadding>
         <CategoryWrapper
-          // categories={categories}
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
+        // selectedCategory={selectedCategory}
+        // setSelectedCategory={setSelectedCategory}
         />
       </CategoryPadding>
 

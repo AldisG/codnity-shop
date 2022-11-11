@@ -1,11 +1,3 @@
-export type StoreItemsFetchCall = {
-  data: StoreItemType[];
-  isLoading: boolean;
-  isSuccess: boolean;
-  isError: boolean;
-  isFetching: boolean;
-};
-
 export type StoreItemType = {
   category: string;
   description: string;

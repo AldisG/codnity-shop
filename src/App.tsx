@@ -11,9 +11,8 @@ import NavigationBar from './components/navigation/NavigationBar';
 import Footer from './components/footer/Footer';
 import { Box } from '@mui/system';
 import { useAppDispatch } from './store/redux/hooks';
-import { StoreItemType } from './store/types';
 import { useGetStoreItemsQuery } from './store/services/storeApiCalls';
-import { setStoreProducts } from './store/slices/storeProductsSlice';
+import { initiateStoreCall } from './store/slices/storeProductsSlice';
 
 const initialLoad = {
   start: { opacity: 0 },
@@ -22,26 +21,13 @@ const initialLoad = {
 
 const App = () => {
   const dispatch = useAppDispatch();
-
-  const { data, isSuccess, isLoading, isError, isFetching } =
+  const { data, isError, isLoading, isSuccess, isFetching } =
     useGetStoreItemsQuery('');
 
   useEffect(() => {
-    if (isSuccess) {
-      const storeItems = data.map((item: StoreItemType) => ({
-        ...item,
-        totalAmount: 10,
-      })) as StoreItemType[];
-      dispatch(
-        setStoreProducts({
-          data: storeItems,
-          isLoading,
-          isSuccess,
-          isError,
-          isFetching,
-        })
-      );
-    }
+    dispatch(
+      initiateStoreCall({ data, isError, isLoading, isSuccess, isFetching })
+    );
   }, [data]);
 
   return (

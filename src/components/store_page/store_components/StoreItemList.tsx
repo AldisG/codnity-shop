@@ -7,13 +7,12 @@ import StoreItem from './StoreItem';
 import { useAppSelector } from '../../../store/redux/hooks';
 
 export const StoreItemList = () => {
-  const storeData = useAppSelector(
-    ({ storeProductsSlice }) => storeProductsSlice.storeProductList
+  const { isError, isLoading, isFetching } = useAppSelector(
+    ({ storeProductsSlice }) => storeProductsSlice
   );
-  const filteredStoreData = useAppSelector(
+  const storeItems = useAppSelector(
     ({ storeProductsSlice }) => storeProductsSlice.filteredData
   );
-  const { data: storeItems, isError, isLoading, isFetching } = storeData;
 
   if (isLoading || isFetching) {
     return <LoadingItems />;
@@ -22,7 +21,7 @@ export const StoreItemList = () => {
   }
 
   const chooseStoreDataArray =
-    filteredStoreData.length === 0 ? storeItems : filteredStoreData;
+    storeItems.length === 0 ? storeItems : storeItems;
 
   return (
     <Grid container>
