@@ -1,16 +1,23 @@
 import { Grid } from '@mui/material';
-import { FC } from 'react';
-import ArrangeWrapper from './ArrangeWrapper';
+import { useState } from 'react';
+import { arangeByOptions, priceRanges } from '../../utility/options';
+import { convertSelectValueToString } from '../../utility/convertSelectValueToString';
+import OrderByWrapper from './OrderByWrapper';
 import CategoryPadding from './CategoryPadding';
 import CategoryWrapper from './CategoryWrapper';
 import PriceRangeWrapper from './PriceRangeWrapper';
 
-type P = {
-  categories: string[];
-};
+const defaultArrangeOptionsValue = convertSelectValueToString(
+  arangeByOptions[0].type,
+  arangeByOptions[0].a
+);
 
-const mobileSpacers = { xs: 2, md: 0 };
-const FilterWrapper: FC<P> = ({ categories }) => {
+const mobileScreenSpacing = { xs: 2, md: 0 };
+
+const FilterWrapper = () => {
+  const [changeOrder, setchangeOrder] = useState(defaultArrangeOptionsValue);
+  const [priceRange, setPriceRange] = useState(priceRanges[0]);
+
   return (
     <Grid
       item
@@ -20,16 +27,26 @@ const FilterWrapper: FC<P> = ({ categories }) => {
       px={{ xs: 2, md: 0 }}
       mb={{ xs: 2, md: 0 }}
       height="max-content"
-      gap={mobileSpacers}
+      gap={mobileScreenSpacing}
     >
       <CategoryPadding>
-        <CategoryWrapper categories={categories} />
+        <CategoryWrapper />
       </CategoryPadding>
+
       <CategoryPadding>
-        <ArrangeWrapper />
+        <OrderByWrapper
+          changeOrder={changeOrder}
+          arangeByOptions={arangeByOptions}
+          setchangeOrder={setchangeOrder}
+        />
       </CategoryPadding>
+
       <CategoryPadding>
-        <PriceRangeWrapper />
+        <PriceRangeWrapper
+          priceRange={priceRange}
+          priceRanges={priceRanges}
+          setPriceRange={setPriceRange}
+        />
       </CategoryPadding>
     </Grid>
   );

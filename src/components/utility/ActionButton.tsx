@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 type P = {
   text: string;
+  disabled?: boolean;
   goTo?: string;
   lowAccent?: boolean;
   caution?: boolean;
@@ -13,6 +14,7 @@ type P = {
 
 const ActionButton: FC<P> = ({
   text,
+  disabled,
   goTo,
   lowAccent,
   caution,
@@ -28,6 +30,7 @@ const ActionButton: FC<P> = ({
       <Button
         variant={lowAccent ? 'text' : 'contained'}
         size={lowAccent ? 'small' : 'large'}
+        disabled={disabled}
         // @ts-ignore
         sx={{
           color: (t) => (caution ? t.palette.warning.main : t.palette.primary),

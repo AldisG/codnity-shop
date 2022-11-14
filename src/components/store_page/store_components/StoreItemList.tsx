@@ -1,40 +1,40 @@
 import { Grid } from '@mui/material';
-import { useGetStoreItemsQuery } from '../../../store/services/storeApiCalls';
-import { StoreItemType } from '../../utility/types';
-import FilterWrapper from '../filter_components/FilterWrapper';
+import { StoreItemType } from '../../../store/types';
 import LoadingItems from './LoadingItems';
 import NoItemsToShow from './NoItemsToShow';
 import StoreItem from './StoreItem';
+import { useAppSelector } from '../../../store/redux/hooks';
+import StoreContentWrapper from './StoreContentWrapper';
 
 export const StoreItemList = () => {
-  const { data, isLoading, isError, isFetching } =
-    useGetStoreItemsQuery('');
-  const dataFiltering = data?.length
-    ? data?.map((item: StoreItemType) => item.category)
-    : ([''] as string[]);
-
-  const filteredCategories = new Set<string[]>(Array.from(dataFiltering));
-  // @ts-ignore
-  const categories = ['all', ...filteredCategories];
+  const { isError, isLoading, isFetching } = useAppSelector(
+    ({ storeProductsSlice }) => storeProductsSlice
+  );
+  const storeItems = useAppSelector(
+    ({ storeProductsSlice }) => storeProductsSlice.filteredData
+  );
 
   if (isLoading || isFetching) {
     return <LoadingItems />;
-  } else if (isError || !data || data.length == 0) {
-    return <NoItemsToShow />;
+  } else if (isError || !storeItems || storeItems.length == 0) {
+    return (
+      <StoreContentWrapper>
+        <NoItemsToShow />
+      </StoreContentWrapper>
+    );
   }
 
-  return (
-    <Grid container>
-      <FilterWrapper categories={categories || ['']} />
+  const chooseStoreDataArray =
+    storeItems.length === 0 ? storeItems : storeItems;
 
-      <Grid item xs={12} md={10}>
-        <Grid container sx={{ margin: 0 }}>
-          {data.map((item: StoreItemType) => {
-            return <StoreItem key={item.id} item={item} />;
-          })}
-        </Grid>
+  return (
+    <StoreContentWrapper>
+      <Grid container sx={{ margin: 0 }}>
+        {chooseStoreDataArray.map((item: StoreItemType) => {
+          return <StoreItem key={item.id} item={item} />;
+        })}
       </Grid>
-    </Grid>
+    </StoreContentWrapper>
   );
 };
 

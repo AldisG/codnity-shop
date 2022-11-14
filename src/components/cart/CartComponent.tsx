@@ -1,18 +1,16 @@
 import {
   Dialog,
   DialogContent,
-  Table,
-  TableCell,
-  TableHead,
-  TableRow,
   Typography,
 } from '@mui/material';
 import { Box } from '@mui/system';
 import { FC, useState } from 'react';
-import { AiOutlineClose } from 'react-icons/ai';
+import { useAppDispatch, useAppSelector } from '../../store/redux/hooks';
+import { removeAllItems } from '../../store/slices/cartProductsSlice';
 import ActionButton from '../utility/ActionButton';
 import CloseButton from '../utility/CloseButton';
 import CartTableHead from './CartTableHead';
+import SnackBarUniversal from '../utility/SnackBarUniversal';
 
 type P = {
   cartOpen: boolean;
@@ -31,11 +29,22 @@ const tableContainerStyle = {
   boxShadow: '4px 4px 8px #ccc',
 };
 
-const handlePurchaseItems = () => {
-  alert('create success modal, clear cart list, send to store page');
-};
-
 const CartComponent: FC<P> = ({ cartOpen, setcartOpen }) => {
+  const [showSnackbar, setShowSnackbar] = useState(false);
+
+  const dispatch = useAppDispatch();
+  const userCartContents = useAppSelector(
+    ({ cartProductsSlice }) => cartProductsSlice.userCart
+  );
+  const handlePurchaseItems = () => {
+    alert('create success modal, clear cart list, send to store page');
+  };
+  const handleRemoveAllItems = () => {
+    if (userCartContents.length > 0) {
+      setShowSnackbar(true);
+      dispatch(removeAllItems());
+    }
+  };
   return (
     <Dialog onClose={() => setcartOpen(false)} open={cartOpen} maxWidth="xl">
       <CloseButton setcartOpen={setcartOpen} />
@@ -60,15 +69,27 @@ const CartComponent: FC<P> = ({ cartOpen, setcartOpen }) => {
         >
           <Typography component="div">Total:</Typography>
           <Typography component="span" variant="h5" fontWeight="bold">
-            {99}$
+           {99}$  {/* ADAPTIVE PRICE */}
           </Typography>
         </Box>
 
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <ActionButton text="delete items" lowAccent={true} caution={true} />
+          <ActionButton
+            text="remove all"
+            disabled={userCartContents.length === 0}
+            lowAccent={true}
+            caution={true}
+            simpleFunc={handleRemoveAllItems}
+          />
           <ActionButton text="Purchase" simpleFunc={handlePurchaseItems} />
         </Box>
       </DialogContent>
+      <SnackBarUniversal
+        text="Your cart now is empty"
+        caution={true}
+        showSnackbar={showSnackbar}
+        setShowSnackbar={setShowSnackbar}
+      />
     </Dialog>
   );
 };

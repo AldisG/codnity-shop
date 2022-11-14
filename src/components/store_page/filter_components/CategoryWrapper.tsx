@@ -5,19 +5,21 @@ import {
   SelectChangeEvent,
   Typography,
 } from '@mui/material';
-import { FC, useState } from 'react';
+import { useState } from 'react';
+import { useAppDispatch } from '../../../store/redux/hooks';
+import { handleFiltering } from '../../../store/slices/storeProductsSlice';
+import { categories } from '../../utility/options';
 import CustomFilterForm from '../../utility/CustomFilterForm';
 
-type P = {
-  categories: string[];
-};
+const CategoryWrapper = () => {
+  const [selectedCategory, setSelectedCategory] = useState(categories[0].name);
 
-const CategoryWrapper: FC<P> = ({ categories }) => {
-  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+  const dispatch = useAppDispatch();
 
   const handleChange = (event: SelectChangeEvent) => {
-    setSelectedCategory(event.target.value);
-    // fire displayCategory event from store (create it)
+    const value = event.target.value;
+    setSelectedCategory(value);
+    dispatch(handleFiltering({type: 'category', value}))
   };
 
   return (
@@ -31,11 +33,11 @@ const CategoryWrapper: FC<P> = ({ categories }) => {
           label="category"
           onChange={handleChange}
         >
-          {categories.map((category) => (
-            <MenuItem value={category} key={category}>
-              <Typography>{category}</Typography>
+          {categories.map(({ label, name }) => (
+            <MenuItem value={name} key={name}>
+              <Typography>{label}</Typography>
             </MenuItem>
-          ))}{' '}
+          ))}
         </Select>
       </>
     </CustomFilterForm>

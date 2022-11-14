@@ -1,7 +1,6 @@
 import {
-  FormControl,
+  Box,
   FormControlLabel,
-  FormLabel,
   InputLabel,
   MenuItem,
   Radio,
@@ -9,21 +8,37 @@ import {
   Select,
   SelectChangeEvent,
 } from '@mui/material';
-import { Box } from '@mui/system';
-import React, { useState } from 'react';
+import { FC } from 'react';
+import { useAppDispatch } from '../../../store/redux/hooks';
+import { handleFiltering } from '../../../store/slices/storeProductsSlice';
 import CustomFilterForm from '../../utility/CustomFilterForm';
 
-const priceRanges = ['all', '0-20', '20-100', '100-1000'];
+type P = {
+  priceRange: string;
+  priceRanges: string[];
+  setPriceRange: (value: string) => void;
+};
 
-const PriceRangeWrapper = () => {
-  const [priceRange, setPriceRange] = useState(priceRanges[0]);
-
+const PriceRangeWrapper: FC<P> = ({
+  priceRange,
+  priceRanges,
+  setPriceRange,
+}) => {
+  const dispatch = useAppDispatch();
   const handleChange = (event: SelectChangeEvent) => {
+    const value = event.target.value;
     setPriceRange(event.target.value);
-    // fire price range items event from store (create it)
+    dispatch(handleFiltering({type: 'priceRange', value}))
+
   };
   return (
     <>
+      <InputLabel
+        id="select-category-label"
+        sx={{ display: { xs: 'none', md: 'block' } }}
+      >
+        Price range
+      </InputLabel>
       <CustomFilterForm>
         <RadioGroup
           sx={{ display: { xs: 'none', md: 'grid' } }}

@@ -6,9 +6,13 @@ import StorePage from './pages/StorePage';
 import Contact from './pages/Contact';
 import Product from './pages/Product';
 import PageNotFound from './pages/PageNotFound';
+import { useEffect } from 'react';
 import NavigationBar from './components/navigation/NavigationBar';
 import Footer from './components/footer/Footer';
 import { Box } from '@mui/system';
+import { useAppDispatch } from './store/redux/hooks';
+import { useGetStoreItemsQuery } from './store/services/storeApiCalls';
+import { initiateStoreCall } from './store/slices/storeProductsSlice';
 
 const initialLoad = {
   start: { opacity: 0 },
@@ -16,6 +20,16 @@ const initialLoad = {
 };
 
 const App = () => {
+  const dispatch = useAppDispatch();
+  const { data, isError, isLoading, isSuccess, isFetching } =
+    useGetStoreItemsQuery('');
+
+  useEffect(() => {
+    dispatch(
+      initiateStoreCall({ data, isError, isLoading, isSuccess, isFetching })
+    );
+  }, [data]);
+
   return (
     <motion.div
       variants={initialLoad}

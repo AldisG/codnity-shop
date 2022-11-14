@@ -2,19 +2,18 @@ import { Grid, Paper, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Box } from '@mui/system';
 import { FC } from 'react';
-import { StoreItemType } from '../../utility/types';
 import PriceInfoWrapper from './PriceInfoWrapper';
 import Ratings from './Ratings';
 import ImageWrapper from './ImageWrapper';
 import CustomizedTooltips from '../elements/ShopItemTooltip';
 import { Link } from 'react-router-dom';
+import { StoreItemType } from '../../../store/types';
 
 type Props = {
   item: StoreItemType;
 };
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+const Card = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   margin: 0,
   textAlign: 'center',
@@ -49,7 +48,6 @@ const StoreItem: FC<Props> = ({ item }) => {
       lg={3}
       xl={2}
       sx={{
-        margin: 0,
         p: 2,
         pt: 4,
         outline: '1px solid #333',
@@ -59,7 +57,7 @@ const StoreItem: FC<Props> = ({ item }) => {
       <Link to={'/store/' + id}>
         <Box sx={{ minHeight: '100%' }}>
           <CustomizedTooltips title={title}>
-            <Item key={id}>
+            <Card key={id}>
               <Typography variant="h5" fontWeight="bold" component="div">
                 {editedTitle()}
               </Typography>
@@ -68,7 +66,7 @@ const StoreItem: FC<Props> = ({ item }) => {
                 <PriceInfoWrapper fakeNew={title.length} price={price} />
                 <Ratings rating={rating} />
               </Box>
-            </Item>
+            </Card>
           </CustomizedTooltips>
         </Box>
       </Link>
