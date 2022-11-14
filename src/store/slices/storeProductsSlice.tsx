@@ -80,22 +80,7 @@ const storeProductsSlice = createSlice({
       const {
         payload: { type, value },
       } = action;
-      switch (type) {
-        case 'category':
-          updateFilters(type, value);
-          // should call relevant filter data function here
-          break;
-        case 'order':
-          updateFilters(type, value);
-          // should call relevant filter data function here
-          break;
-        case 'priceRange':
-          updateFilters(type, value);
-          // should call relevant filter data function here
-          break;
-        default:
-          break;
-      }
+      updateFilters(type, value);
     },
   },
 });
