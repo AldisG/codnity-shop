@@ -14,3 +14,20 @@ export type CartItem = {
   amount: number;
   price: number;
 };
+
+export type StoreFilterTypes = 'category' | 'order' | 'priceRange';
+
+export type InitialStoreCall = {
+  data: StoreItemType[];
+  isError: boolean;
+  isLoading: boolean;
+  isSuccess: boolean;
+  isFetching: boolean;
+};
+
+export type FilterPayload = {
+  payload: {
+    type: StoreFilterTypes;
+    value: string;
+  };
+};

@@ -1,6 +1,5 @@
 import { Grid } from '@mui/material';
 import { StoreItemType } from '../../../store/types';
-import FilterWrapper from '../filter_components/FilterWrapper';
 import LoadingItems from './LoadingItems';
 import NoItemsToShow from './NoItemsToShow';
 import StoreItem from './StoreItem';
@@ -14,7 +13,7 @@ export const StoreItemList = () => {
   const storeItems = useAppSelector(
     ({ storeProductsSlice }) => storeProductsSlice.filteredData
   );
-  console.log(storeItems);
+
   if (isLoading || isFetching) {
     return <LoadingItems />;
   } else if (isError || !storeItems || storeItems.length == 0) {

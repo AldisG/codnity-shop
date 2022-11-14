@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { FC } from 'react';
 import { useAppDispatch } from '../../../store/redux/hooks';
-import { setProductPriceRange } from '../../../store/slices/storeProductsSlice';
+import { handleFiltering } from '../../../store/slices/storeProductsSlice';
 import CustomFilterForm from '../../utility/CustomFilterForm';
 
 type P = {
@@ -28,8 +28,8 @@ const PriceRangeWrapper: FC<P> = ({
   const handleChange = (event: SelectChangeEvent) => {
     const value = event.target.value;
     setPriceRange(event.target.value);
-    dispatch(setProductPriceRange(value));
-    // fire price range items event from store (create it)
+    dispatch(handleFiltering({type: 'priceRange', value}))
+
   };
   return (
     <>

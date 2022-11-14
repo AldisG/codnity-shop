@@ -1,15 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { BsReverseLayoutSidebarInsetReverse } from 'react-icons/bs';
-import { categories } from '../../components/utility/options';
-import { StoreItemType } from '../types';
-
-type InitialStoreCall = {
-  data: StoreItemType[];
-  isError: boolean;
-  isLoading: boolean;
-  isSuccess: boolean;
-  isFetching: boolean;
-};
+import { FilterPayload, InitialStoreCall, StoreFilterTypes, StoreItemType } from '../types';
+import { decideOrder, determineCategory } from './storeProductsFunctions';
 
 const initialState = {
   data: [] as StoreItemType[], // serves as fallback
@@ -19,6 +10,11 @@ const initialState = {
   isFetching: true,
   filteredData: [] as StoreItemType[],
   isDirty: false,
+  filterStatus: {
+    category: 'all',
+    order: 'default',
+    priceRange: 'all',
+  },
 };
 
 const storeProductsSlice = createSlice({
@@ -34,58 +30,78 @@ const storeProductsSlice = createSlice({
       state.isSuccess = payload.isSuccess;
       state.isFetching = payload.isFetching;
     },
+    handleFiltering: (state, action: FilterPayload) => {
+      const updateFilters = (type: StoreFilterTypes, value: string) => {
+        state.filterStatus = { ...state.filterStatus, [type]: value };
 
-    changeDisplayedItemsByCategory: (
-      state,
-      { payload }: { payload: string }
-    ) => {
-      const changeStoreState = (payload: string) => {
-        state.isDirty = true;
-        state.filteredData = state.data.filter(
-          (item) => item.category === payload
-        );
+        switch (type) {
+          case 'category':
+            const changeStoreState = (category: string) => {
+              if (category === 'all') {
+                state.filteredData = state.data;
+                return
+              }
+              state.filteredData = state.data.filter(
+                (item) => item.category === category
+              );
+            };
+            determineCategory(value, changeStoreState);
+            break;
+
+          case 'priceRange':
+            if (value === 'all' || !value) {
+              state.filteredData = state.data;
+              return;
+            }
+            const [from, to] = value.split('-').map((part) => Number(part));
+            state.filteredData = state.filteredData.filter((item) => {
+              return item.price >= from && item.price <= to;
+            });
+            break;
+
+          case 'order':
+            const [type, orderDirection] = value.split('/');
+            if (orderDirection === 'high') {
+              state.filteredData = state.filteredData
+                .sort((a, b) => decideOrder(type, a, b))
+                .reverse();
+            } else {
+              state.filteredData = state.filteredData.sort((a, b) =>
+                decideOrder(type, a, b)
+              );
+            }
+            break;
+
+          default:
+            break;
+        }
       };
-      switch (payload) {
-        case categories[0].name:
-          // set it to original items array
-          state.filteredData = state.data;
-          state.isDirty = false;
+
+      const {
+        payload: { type, value },
+      } = action;
+      switch (type) {
+        case 'category':
+          updateFilters(type, value);
+          // should call relevant filter data function here
           break;
-        case categories[1].name:
-          changeStoreState(categories[1].label);
+        case 'order':
+          updateFilters(type, value);
+          // should call relevant filter data function here
           break;
-        case categories[2].name:
-          changeStoreState(categories[2].label);
-          break;
-        case categories[3].name:
-          changeStoreState(categories[3].label);
-          break;
-        case categories[4].name:
-          changeStoreState(categories[4].label);
+        case 'priceRange':
+          updateFilters(type, value);
+          // should call relevant filter data function here
           break;
         default:
           break;
       }
-    },
-    setProductPriceRange: (state, { payload }: { payload: string }) => {
-      if (payload === 'all' || !payload) {
-        state.filteredData = state.data;
-        return;
-      }
-      const [from, to] = payload.split('-').map((value) => Number(value));
-      // if dirty, show what data, filtered or all?
-
-      // ja liek data, tad tas sava zinja visus parejos options reseto, lai gan opcijas paliek tadas pasas
-      state.filteredData = state.filteredData.filter((item) => {
-        return item.price >= from && item.price <= to;
-      });
     },
   },
 });
 
 export const {
   initiateStoreCall,
-  changeDisplayedItemsByCategory,
-  setProductPriceRange,
+  handleFiltering,
 } = storeProductsSlice.actions;
 export default storeProductsSlice.reducer;

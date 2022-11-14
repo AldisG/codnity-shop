@@ -1,5 +1,7 @@
 import { InputLabel, Select, SelectChangeEvent } from '@mui/material';
 import { FC } from 'react';
+import { useAppDispatch } from '../../../store/redux/hooks';
+import { handleFiltering } from '../../../store/slices/storeProductsSlice';
 import { convertSelectValueToString } from '../../utility/convertSelectValueToString';
 import CustomFilterForm from '../../utility/CustomFilterForm';
 
@@ -13,15 +15,17 @@ type P = {
   setchangeOrder: (value: string) => void;
 };
 
-const ArrangeWrapper: FC<P> = ({
+const OrderByWrapper: FC<P> = ({
   changeOrder,
   arangeByOptions,
   setchangeOrder,
 }) => {
+  const dispatch = useAppDispatch()
 
   const handleChange = (event: SelectChangeEvent) => {
-    setchangeOrder(event.target.value);
-    // fire rearrange items event from store (create it)
+    const value = event.target.value
+    setchangeOrder(value);
+    dispatch(handleFiltering({type: 'order', value}))
   };
   return (
     <CustomFilterForm>
@@ -35,10 +39,10 @@ const ArrangeWrapper: FC<P> = ({
           value={changeOrder}
         >
           {arangeByOptions?.map(({ type, a, b }) => (
-            <optgroup key={type} label={type}>
-              <option value={convertSelectValueToString(type, a)}>{a}</option>
-              <option value={convertSelectValueToString(type, b)}>{b}</option>
-            </optgroup>
+              <optgroup key={type} label={type}>
+                <option value={convertSelectValueToString(type, 'high')}>{a}</option>
+                <option value={convertSelectValueToString(type, 'low')}>{b}</option>
+              </optgroup>
           ))}
         </Select>
       </>
@@ -46,4 +50,4 @@ const ArrangeWrapper: FC<P> = ({
   );
 };
 
-export default ArrangeWrapper;
+export default OrderByWrapper;

@@ -2,7 +2,7 @@ import { Grid } from '@mui/material';
 import { useState } from 'react';
 import { arangeByOptions, priceRanges } from '../../utility/options';
 import { convertSelectValueToString } from '../../utility/convertSelectValueToString';
-import ArrangeWrapper from './ArrangeWrapper';
+import OrderByWrapper from './OrderByWrapper';
 import CategoryPadding from './CategoryPadding';
 import CategoryWrapper from './CategoryWrapper';
 import PriceRangeWrapper from './PriceRangeWrapper';
@@ -34,7 +34,7 @@ const FilterWrapper = () => {
       </CategoryPadding>
 
       <CategoryPadding>
-        <ArrangeWrapper
+        <OrderByWrapper
           changeOrder={changeOrder}
           arangeByOptions={arangeByOptions}
           setchangeOrder={setchangeOrder}

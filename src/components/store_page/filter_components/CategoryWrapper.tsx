@@ -7,7 +7,7 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 import { useAppDispatch } from '../../../store/redux/hooks';
-import { changeDisplayedItemsByCategory } from '../../../store/slices/storeProductsSlice';
+import { handleFiltering } from '../../../store/slices/storeProductsSlice';
 import { categories } from '../../utility/options';
 import CustomFilterForm from '../../utility/CustomFilterForm';
 
@@ -19,7 +19,7 @@ const CategoryWrapper = () => {
   const handleChange = (event: SelectChangeEvent) => {
     const value = event.target.value;
     setSelectedCategory(value);
-    dispatch(changeDisplayedItemsByCategory(value));
+    dispatch(handleFiltering({type: 'category', value}))
   };
 
   return (
