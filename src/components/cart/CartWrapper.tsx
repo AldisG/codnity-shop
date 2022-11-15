@@ -1,48 +1,38 @@
-import { Avatar, Button, MenuItem, Typography } from '@mui/material';
+import { Button } from '@mui/material';
 import { Box } from '@mui/system';
 import { BsCart3, BsCartFill } from 'react-icons/bs';
 import CartComponent from './CartComponent';
 import { useState } from 'react';
+import { useAppSelector } from '../../store/redux/hooks';
+import ItemCounter from './ItemCounter';
 
 const CartWrapper = () => {
-  const storeItemCountDummy = 0;
-  const [cartOpen, setcartOpen] = useState(false);
+  const amountOfItemsInCart = useAppSelector(
+    ({ cartProductsSlice }) => cartProductsSlice.userCart
+  ).length;
+  const [cartOpen, setCartOpen] = useState(false);
 
   return (
     <Box>
       <Button
         variant="text"
         aria-label="Check your shopping cart"
-        sx={{ display: 'flex', color: '#fff', py: 0.2 }}
+        sx={{ display: 'flex', color: '#fff' }}
         onClick={() => {
-          console.log('clicked');
-          setcartOpen(true);
+          setCartOpen(true);
         }}
       >
-        <Typography variant="body1">Cart</Typography>
-        {storeItemCountDummy > 0 && (
-          <Avatar
-            sx={{
-              bgcolor: '#05c46b',
-              color: '#fff',
-              width: '25px',
-              height: '25px',
-              fontSize: 18,
-              ml: 1,
-            }}
-          >
-            {storeItemCountDummy}
-          </Avatar>
-        )}
-        <Box pl={1}>
-          {storeItemCountDummy > 0 ? (
-            <BsCartFill size={25} />
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          {amountOfItemsInCart > 0 && <ItemCounter amountOfItemsInCart={amountOfItemsInCart} />}
+
+          {amountOfItemsInCart > 0 ? (
+            <BsCartFill size={30} />
           ) : (
-            <BsCart3 size={25} />
+            <BsCart3 size={30} />
           )}
         </Box>
       </Button>
-      <CartComponent cartOpen={cartOpen} setcartOpen={setcartOpen} />
+      <CartComponent cartOpen={cartOpen} setCartOpen={setCartOpen} />
     </Box>
   );
 };

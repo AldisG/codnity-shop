@@ -1,8 +1,4 @@
-import {
-  Dialog,
-  DialogContent,
-  Typography,
-} from '@mui/material';
+import { Dialog, DialogContent, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { FC, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/redux/hooks';
@@ -14,7 +10,7 @@ import SnackBarUniversal from '../utility/SnackBarUniversal';
 
 type P = {
   cartOpen: boolean;
-  setcartOpen: (value: boolean) => void;
+  setCartOpen: (value: boolean) => void;
 };
 
 const tableWrapperStyle = {
@@ -29,10 +25,11 @@ const tableContainerStyle = {
   boxShadow: '4px 4px 8px #ccc',
 };
 
-const CartComponent: FC<P> = ({ cartOpen, setcartOpen }) => {
+const CartComponent: FC<P> = ({ cartOpen, setCartOpen }) => {
   const [showSnackbar, setShowSnackbar] = useState(false);
 
   const dispatch = useAppDispatch();
+
   const userCartContents = useAppSelector(
     ({ cartProductsSlice }) => cartProductsSlice.userCart
   );
@@ -45,9 +42,12 @@ const CartComponent: FC<P> = ({ cartOpen, setcartOpen }) => {
       dispatch(removeAllItems());
     }
   };
+  // const totalPriceOfAllItems = userCartContents.reduce((a, b) => {
+  //   return a.price * a.amount + b.price * b.amount, []
+  // });
   return (
-    <Dialog onClose={() => setcartOpen(false)} open={cartOpen} maxWidth="xl">
-      <CloseButton setcartOpen={setcartOpen} />
+    <Dialog onClose={() => setCartOpen(false)} open={cartOpen} maxWidth="xl">
+      <CloseButton setCartOpen={setCartOpen} />
 
       <DialogContent sx={{ pt: 0 }}>
         <Typography variant="h4" width={1000}>
@@ -69,7 +69,7 @@ const CartComponent: FC<P> = ({ cartOpen, setcartOpen }) => {
         >
           <Typography component="div">Total:</Typography>
           <Typography component="span" variant="h5" fontWeight="bold">
-           {99}$  {/* ADAPTIVE PRICE */}
+            sxxxxx $ {/* ADAPTIVE PRICE */}
           </Typography>
         </Box>
 
