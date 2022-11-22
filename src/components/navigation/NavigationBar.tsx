@@ -6,11 +6,15 @@ import CartWrapper from '../cart/CartWrapper';
 import { useAppSelector } from '../../store/redux/hooks';
 import { Container } from '@mui/system';
 
+const style = {
+  backgroundColor: '#333',
+};
+
 const NavigationBar = () => {
   const modalIsOpen = useAppSelector(({ openModal }) => openModal.openModal);
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={style}>
       <Container maxWidth="xl">
         <Box
           sx={{
