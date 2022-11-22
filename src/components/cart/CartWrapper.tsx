@@ -6,17 +6,17 @@ import { useState } from 'react';
 
 const CartWrapper = () => {
   const storeItemCountDummy = 0;
-  const [cartOpen, setcartOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
 
   return (
-    <Box>
+    <Box justifySelf="flex-end">
       <Button
         variant="text"
         aria-label="Check your shopping cart"
         sx={{ display: 'flex', color: '#fff', py: 0.2 }}
         onClick={() => {
           console.log('clicked');
-          setcartOpen(true);
+          setCartOpen(true);
         }}
       >
         <Typography variant="body1">Cart</Typography>
@@ -42,7 +42,7 @@ const CartWrapper = () => {
           )}
         </Box>
       </Button>
-      <CartComponent cartOpen={cartOpen} setcartOpen={setcartOpen} />
+      <CartComponent cartOpen={cartOpen} setCartOpen={setCartOpen} />
     </Box>
   );
 };

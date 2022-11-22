@@ -3,36 +3,51 @@ import NavigationButtons from './NavigationButtons';
 import HamburgerMenu from './HamburgerMenu';
 import Logo from '../utility/Logo';
 import CartWrapper from '../cart/CartWrapper';
-import { useAppSelector } from '../../store/redux/hooks';
 import { Container } from '@mui/system';
+import Drawer from './Drawer';
+
+const showHamburgerMenu = {
+  display: {
+    xs: 'flexe',
+    sm: 'none',
+  },
+};
+const showNavigationBar = {
+  display: {
+    xs: 'none',
+    sm: 'block',
+  },
+};
 
 const style = {
   backgroundColor: '#333',
 };
 
 const NavigationBar = () => {
-  const modalIsOpen = useAppSelector(({ openModal }) => openModal.openModal);
-
   return (
     <AppBar position="static" sx={style}>
       <Container maxWidth="xl">
         <Box
           sx={{
             display: 'grid',
-            gridTemplateColumns: modalIsOpen ? '.5fr 1fr .5fr' : '1fr .2fr',
+            gridTemplateColumns: '.5fr 1fr .5fr',
             justifyContent: 'space-between',
-            justifyItems: 'flex-end',
             alignItems: 'center',
             width: '100%',
             position: 'relative',
           }}
         >
-          {/* Modal vieta izmantot <Drawer /> mui komponenti (perfect alternative) */}
-          {modalIsOpen ? <NavigationButtons /> : <HamburgerMenu />}
+          <Box sx={showNavigationBar}>
+            <NavigationButtons />
+          </Box>
+          <Box sx={showHamburgerMenu}>
+            <HamburgerMenu />
+          </Box>
           <Logo />
           <CartWrapper />
         </Box>
       </Container>
+      <Drawer />
     </AppBar>
   );
 };
