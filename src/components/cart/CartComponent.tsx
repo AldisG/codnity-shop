@@ -47,8 +47,7 @@ const CartComponent: FC<P> = ({ cartOpen, setCartOpen }) => {
   // });
   return (
     <Dialog onClose={() => setCartOpen(false)} open={cartOpen} maxWidth="xl">
-      <CloseButton setCartOpen={setCartOpen} />
-
+      <CloseButton onClick={setCartOpen} />
       <DialogContent sx={{ pt: 0 }}>
         <Typography variant="h4" width={1000}>
           Your cart

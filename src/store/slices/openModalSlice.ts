@@ -1,24 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  openModal: true,
+  openModal: false,
 };
 
 const testSlice = createSlice({
   name: 'openModalSlice',
   initialState,
   reducers: {
-    openModal: (state) => {
-      state.openModal = !state.openModal;
+    openModal: (state, { payload }: { payload: boolean }) => {
+      state.openModal = payload;
       console.log(state.openModal);
     },
   },
-  // reducers: {
-  //   openModal: ({ openModal }) => {
-  //     openModal = !openModal;
-  //     console.log(openModal);
-  //   },
-  // },
 });
 
 export const { openModal } = testSlice.actions;

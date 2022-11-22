@@ -7,18 +7,15 @@ import { useAppSelector } from '../../store/redux/hooks';
 import ItemCounter from './ItemCounter';
 
 const CartWrapper = () => {
-  const amountOfItemsInCart = useAppSelector(
-    ({ cartProductsSlice }) => cartProductsSlice.userCart
-  ).length;
+  const storeItemCountDummy = 0;
   const [cartOpen, setCartOpen] = useState(false);
 
   return (
-    <Box>
+    <Box justifySelf="flex-end">
       <Button
         variant="text"
         aria-label="Check your shopping cart"
         sx={{ display: 'flex', color: '#fff' }}
-        onClick={() => {
           setCartOpen(true);
         }}
       >
