@@ -15,7 +15,6 @@ const initialState = {
     order: 'default',
     priceRange: 'all',
   },
-  itemCountInCart: 0,
 };
 
 const storeProductsSlice = createSlice({
