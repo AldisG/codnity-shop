@@ -29,7 +29,6 @@ const CartComponent: FC<P> = ({ cartOpen, setCartOpen }) => {
   const [showSnackbar, setShowSnackbar] = useState(false);
 
   const dispatch = useAppDispatch();
-
   const userCartContents = useAppSelector(
     ({ cartProductsSlice }) => cartProductsSlice.userCart
   );
@@ -42,12 +41,10 @@ const CartComponent: FC<P> = ({ cartOpen, setCartOpen }) => {
       dispatch(removeAllItems());
     }
   };
-  // const totalPriceOfAllItems = userCartContents.reduce((a, b) => {
-  //   return a.price * a.amount + b.price * b.amount, []
-  // });
   return (
     <Dialog onClose={() => setCartOpen(false)} open={cartOpen} maxWidth="xl">
       <CloseButton onClick={setCartOpen} />
+
       <DialogContent sx={{ pt: 0 }}>
         <Typography variant="h4" width={1000}>
           Your cart
@@ -68,7 +65,7 @@ const CartComponent: FC<P> = ({ cartOpen, setCartOpen }) => {
         >
           <Typography component="div">Total:</Typography>
           <Typography component="span" variant="h5" fontWeight="bold">
-            sxxxxx $ {/* ADAPTIVE PRICE */}
+            {99}$ {/* ADAPTIVE PRICE */}
           </Typography>
         </Box>
 

@@ -14,10 +14,12 @@ const RemoveButton: FC<P> = ({ itemId, onClick }) => {
     <Button
       variant="text"
       size="small"
-      color='warning'
       onClick={() => {
         dispatch(removeAnItem(itemId));
         onClick && onClick();
+      }}
+      sx={{
+        color: '#333',
       }}
     >
       X
