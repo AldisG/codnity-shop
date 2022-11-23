@@ -7,10 +7,10 @@ const Logo = () => {
     <Box
       sx={{
         pointerEvents: 'none',
-        justifySelf: 'center'
+        justifySelf: 'center',
       }}
     >
-      <AiFillShopping size={38} />
+      <AiFillShopping size={38} color="#757de8" />
     </Box>
   );
 };

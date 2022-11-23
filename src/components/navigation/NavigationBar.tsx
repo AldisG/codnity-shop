@@ -19,9 +19,13 @@ const showNavigationBar = {
   },
 };
 
+const style = {
+  backgroundColor: '#333',
+};
+
 const NavigationBar = () => {
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={style}>
       <Container maxWidth="xl">
         <Box
           sx={{
