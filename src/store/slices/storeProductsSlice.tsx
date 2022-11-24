@@ -1,5 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { FilterPayload, InitialStoreCall, StoreFilterTypes, StoreItemType } from '../types';
+import {
+  FilterPayload,
+  InitialStoreCall,
+  StoreFilterTypes,
+  StoreItemType,
+} from '../types';
 import { decideOrder, determineCategory } from './storeProductsFunctions';
 
 const initialState = {
@@ -39,7 +44,7 @@ const storeProductsSlice = createSlice({
             const changeStoreState = (category: string) => {
               if (category === 'all') {
                 state.filteredData = state.data;
-                return
+                return;
               }
               state.filteredData = state.data.filter(
                 (item) => item.category === category
@@ -85,8 +90,6 @@ const storeProductsSlice = createSlice({
   },
 });
 
-export const {
-  initiateStoreCall,
-  handleFiltering,
-} = storeProductsSlice.actions;
+export const { initiateStoreCall, handleFiltering } =
+  storeProductsSlice.actions;
 export default storeProductsSlice.reducer;
