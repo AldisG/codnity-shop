@@ -1,6 +1,5 @@
-import { Box, MenuItem, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { AiFillShopping } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
 
 const Logo = () => {
   return (
@@ -10,7 +9,7 @@ const Logo = () => {
         justifySelf: 'center',
       }}
     >
-      <AiFillShopping size={38} color="#757de8" />
+      <AiFillShopping size={38} color="#1ecbe1" />
     </Box>
   );
 };

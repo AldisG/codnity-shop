@@ -1,24 +1,29 @@
 import { TableBody, TableCell, TableRow } from '@mui/material';
-import { useAppSelector } from '../../store/redux/hooks';
-import SnackBarUniversal from '../utility/SnackBarUniversal';
+import { useAppDispatch, useAppSelector } from '../../store/redux/hooks';
 import EmptyTableRow from './EmptyTableRow';
 import RemoveButton from './RemoveButton';
-import { useState } from 'react';
+import { removeAnItem } from '../../store/slices/cartProductsSlice';
+import { setShowSnackbar } from '../../store/slices/showSnackbarSlice';
 
 const CartTableBody = () => {
-  const [showSnackbar, setShowSnackbar] = useState(false);
+  const dispatch = useAppDispatch();
 
   const userCartContents = useAppSelector(
     ({ cartProductsSlice }) => cartProductsSlice.userCart
   );
+
   if (!userCartContents.length) {
     return <EmptyTableRow />;
   }
-  const handleRemoveItem = () => {
-    if(showSnackbar) {
-      setShowSnackbar(false);
-    } 
-    setShowSnackbar(true);
+  const handleRemoveItem = (id: number) => {
+    dispatch(removeAnItem(id));
+    dispatch(
+      setShowSnackbar({
+        open: true,
+        text: 'Item was removed!',
+        caution: true,
+      })
+    );
   };
   return (
     <>
@@ -38,12 +43,6 @@ const CartTableBody = () => {
             </TableCell>
           </TableRow>
         ))}
-      <SnackBarUniversal
-        text="Item removed"
-        caution={true}
-        showSnackbar={showSnackbar}
-        setShowSnackbar={setShowSnackbar}
-      />
       </TableBody>
     </>
   );

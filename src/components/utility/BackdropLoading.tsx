@@ -1,7 +1,6 @@
 import { Backdrop, CircularProgress, Snackbar } from '@mui/material';
 import React, { FC, useState } from 'react';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
-import SnackBarUniversal from './SnackBarUniversal';
 
 type P = {
   showLoading: boolean;
@@ -16,11 +15,9 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 });
 
 const BackdropLoading: FC<P> = ({ showLoading, setShowLoading }) => {
-  const [showSnackbar, setShowSnackbar] = useState(false);
   const startSnackbarTimer = () => {
     const timer = setTimeout(() => {
       setShowLoading(false);
-      setShowSnackbar(true);
     }, 1100);
     timer;
     return () => {
@@ -39,11 +36,6 @@ const BackdropLoading: FC<P> = ({ showLoading, setShowLoading }) => {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
-      <SnackBarUniversal
-        text="Email has been sent successfully!"
-        showSnackbar={showSnackbar}
-        setShowSnackbar={setShowSnackbar}
-      />
     </>
   );
 };

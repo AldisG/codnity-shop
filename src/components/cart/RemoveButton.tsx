@@ -1,23 +1,19 @@
 import { Button } from '@mui/material';
 import { FC } from 'react';
-import { useAppDispatch } from '../../store/redux/hooks';
-import { removeAnItem } from '../../store/slices/cartProductsSlice';
 
 type P = {
   itemId: number;
-  onClick?: () => void;
+  onClick?: (id: number) => void;
 };
 
 const RemoveButton: FC<P> = ({ itemId, onClick }) => {
-  const dispatch = useAppDispatch();
   return (
     <Button
       variant="text"
       size="small"
       color="warning"
       onClick={() => {
-        dispatch(removeAnItem(itemId));
-        onClick && onClick();
+        onClick && onClick(itemId);
       }}
       sx={{
         color: '#333',

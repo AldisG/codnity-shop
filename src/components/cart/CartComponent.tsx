@@ -1,12 +1,12 @@
 import { Dialog, DialogContent, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/redux/hooks';
 import { removeAllItems } from '../../store/slices/cartProductsSlice';
+import { setShowSnackbar } from '../../store/slices/showSnackbarSlice';
 import ActionButton from '../utility/ActionButton';
 import CloseButton from '../utility/CloseButton';
 import CartTableHead from './CartTableHead';
-import SnackBarUniversal from '../utility/SnackBarUniversal';
 
 type P = {
   cartOpen: boolean;
@@ -26,8 +26,6 @@ const tableContainerStyle = {
 };
 
 const CartComponent: FC<P> = ({ cartOpen, setCartOpen }) => {
-  const [showSnackbar, setShowSnackbar] = useState(false);
-
   const dispatch = useAppDispatch();
   const userCartContents = useAppSelector(
     ({ cartProductsSlice }) => cartProductsSlice.userCart
@@ -37,7 +35,13 @@ const CartComponent: FC<P> = ({ cartOpen, setCartOpen }) => {
   };
   const handleRemoveAllItems = () => {
     if (userCartContents.length > 0) {
-      setShowSnackbar(true);
+      dispatch(
+        setShowSnackbar({
+          open: true,
+          text: 'All items were removed!',
+          caution: true,
+        })
+      );
       dispatch(removeAllItems());
     }
   };
@@ -80,12 +84,6 @@ const CartComponent: FC<P> = ({ cartOpen, setCartOpen }) => {
           <ActionButton text="Purchase" simpleFunc={handlePurchaseItems} />
         </Box>
       </DialogContent>
-      <SnackBarUniversal
-        text="Your cart now is empty"
-        caution={true}
-        showSnackbar={showSnackbar}
-        setShowSnackbar={setShowSnackbar}
-      />
     </Dialog>
   );
 };
