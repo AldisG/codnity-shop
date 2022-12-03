@@ -80,7 +80,6 @@ const StoreProduct = () => {
         </Grid>
         <Grid item xs={12} md={6} p={4}>
           <Box sx={{ display: 'grid', gap: 2 }}>
-            {/* atsevisks typography components ar switch logiku, pec ka nosaka, kadu stilu likt? */}
             <Typography component="div" variant="h3" fontWeight={700}>
               {title}
             </Typography>

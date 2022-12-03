@@ -63,7 +63,7 @@ const StoreItem: FC<Props> = ({ item }) => {
               </Typography>
               <ImageWrapper image={image} title={title} />
               <Box sx={{ zIndex: 2 }}>
-                <PriceInfoWrapper fakeNew={title.length} price={price} />
+                <PriceInfoWrapper price={price} />
                 <Ratings rating={rating} />
               </Box>
             </Card>

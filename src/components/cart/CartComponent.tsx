@@ -7,7 +7,6 @@ import { setShowSnackbar } from '../../store/slices/showSnackbarSlice';
 import ActionButton from '../utility/ActionButton';
 import CloseButton from '../utility/CloseButton';
 import CartTableHead from './CartTableHead';
-import { formatedPrice } from '../../components/utility/formatPrice';
 import TotalPrice from './TotalPrice';
 
 type P = {

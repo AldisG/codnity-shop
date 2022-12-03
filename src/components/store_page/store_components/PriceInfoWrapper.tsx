@@ -4,12 +4,10 @@ import { FC } from 'react';
 import { formatedPrice } from '../../utility/formatPrice';
 
 type P = {
-  fakeNew: number;
   price: number;
 };
 
-const PriceInfoWrapper: FC<P> = ({ fakeNew, price }) => {
-  // Needs to be refactored - sale vs new
+const PriceInfoWrapper: FC<P> = ({ price }) => {
   return (
     <Box sx={{ pb: 1 }}>
       <Typography
