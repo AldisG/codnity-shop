@@ -4,7 +4,7 @@ const initialState = {
   openModal: false,
 };
 
-const testSlice = createSlice({
+const openMpdalSlice = createSlice({
   name: 'openModalSlice',
   initialState,
   reducers: {
@@ -15,5 +15,5 @@ const testSlice = createSlice({
   },
 });
 
-export const { openModal } = testSlice.actions;
-export default testSlice.reducer;
+export const { openModal } = openMpdalSlice.actions;
+export default openMpdalSlice.reducer;

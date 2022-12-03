@@ -1,12 +1,14 @@
 import { Dialog, DialogContent, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/redux/hooks';
 import { removeAllItems } from '../../store/slices/cartProductsSlice';
+import { setShowSnackbar } from '../../store/slices/showSnackbarSlice';
 import ActionButton from '../utility/ActionButton';
 import CloseButton from '../utility/CloseButton';
 import CartTableHead from './CartTableHead';
-import SnackBarUniversal from '../utility/SnackBarUniversal';
+import { formatedPrice } from '../../components/utility/formatPrice';
+import TotalPrice from './TotalPrice';
 
 type P = {
   cartOpen: boolean;
@@ -26,8 +28,6 @@ const tableContainerStyle = {
 };
 
 const CartComponent: FC<P> = ({ cartOpen, setCartOpen }) => {
-  const [showSnackbar, setShowSnackbar] = useState(false);
-
   const dispatch = useAppDispatch();
   const userCartContents = useAppSelector(
     ({ cartProductsSlice }) => cartProductsSlice.userCart
@@ -37,10 +37,17 @@ const CartComponent: FC<P> = ({ cartOpen, setCartOpen }) => {
   };
   const handleRemoveAllItems = () => {
     if (userCartContents.length > 0) {
-      setShowSnackbar(true);
+      dispatch(
+        setShowSnackbar({
+          open: true,
+          text: 'All items were removed!',
+          caution: true,
+        })
+      );
       dispatch(removeAllItems());
     }
   };
+
   return (
     <Dialog onClose={() => setCartOpen(false)} open={cartOpen} maxWidth="xl">
       <CloseButton onClick={setCartOpen} />
@@ -54,20 +61,7 @@ const CartComponent: FC<P> = ({ cartOpen, setCartOpen }) => {
             <CartTableHead />
           </Box>
         </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            alignItems: 'flex-end',
-            gap: 1,
-            pt: 2,
-          }}
-        >
-          <Typography component="div">Total:</Typography>
-          <Typography component="span" variant="h5" fontWeight="bold">
-            {99}$ {/* ADAPTIVE PRICE */}
-          </Typography>
-        </Box>
+        <TotalPrice userCartContents={userCartContents} />
 
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <ActionButton
@@ -77,15 +71,13 @@ const CartComponent: FC<P> = ({ cartOpen, setCartOpen }) => {
             caution={true}
             simpleFunc={handleRemoveAllItems}
           />
-          <ActionButton text="Purchase" simpleFunc={handlePurchaseItems} />
+          <ActionButton
+            text="Purchase"
+            disabled={!userCartContents.length}
+            simpleFunc={handlePurchaseItems}
+          />
         </Box>
       </DialogContent>
-      <SnackBarUniversal
-        text="Your cart now is empty"
-        caution={true}
-        showSnackbar={showSnackbar}
-        setShowSnackbar={setShowSnackbar}
-      />
     </Dialog>
   );
 };

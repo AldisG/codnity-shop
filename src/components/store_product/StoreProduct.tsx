@@ -6,14 +6,14 @@ import { Button, Container, Grid, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import LoadingItems from '../store_page/store_components/LoadingItems';
 import Ratings from '../store_page/store_components/Ratings';
-import { formatedNumb } from '../utility/formatPrice';
+import { formatedPrice } from '../utility/formatPrice';
 import LargeBtn from '../utility/LargeBtn';
 import { StoreItemType } from '../../store/types';
 import ProductNotFound from './ProductNotFound';
 import ChooseAmount from './ChooseAmount';
 import { BsArrowLeft } from 'react-icons/bs';
 import { addItemsToCart } from '../../store/slices/cartProductsSlice';
-import SnackBarUniversal from '../utility/SnackBarUniversal';
+import { setShowSnackbar } from '../../store/slices/showSnackbarSlice';
 
 const StoreProduct = () => {
   const { id } = useParams();
@@ -23,7 +23,6 @@ const StoreProduct = () => {
   );
 
   const [amount, setAmount] = useState(1);
-  const [showSnackbar, setShowSnackbar] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -58,7 +57,13 @@ const StoreProduct = () => {
     if (amount > 1) {
       setAmount(1);
     }
-    setShowSnackbar(true);
+    dispatch(
+      setShowSnackbar({
+        open: true,
+        text: 'Item was added to your cart!',
+        caution: false,
+      })
+    );
   };
 
   return (
@@ -80,7 +85,7 @@ const StoreProduct = () => {
               {title}
             </Typography>
             <Typography component="div" variant="h5" fontWeight={900}>
-              $ {formatedNumb(price)}
+              $ {formatedPrice(price)}
             </Typography>
             <Box
               sx={{
@@ -106,11 +111,6 @@ const StoreProduct = () => {
           </Box>
         </Grid>
       </Grid>
-      <SnackBarUniversal
-        text="Item added to your cart"
-        showSnackbar={showSnackbar}
-        setShowSnackbar={setShowSnackbar}
-      />
     </Container>
   );
 };

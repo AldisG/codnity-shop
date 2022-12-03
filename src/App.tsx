@@ -10,9 +10,10 @@ import { useEffect } from 'react';
 import NavigationBar from './components/navigation/NavigationBar';
 import Footer from './components/footer/Footer';
 import { Box } from '@mui/system';
-import { useAppDispatch } from './store/redux/hooks';
+import { useAppDispatch, useAppSelector } from './store/redux/hooks';
 import { useGetStoreItemsQuery } from './store/services/storeApiCalls';
 import { initiateStoreCall } from './store/slices/storeProductsSlice';
+import UniversalSnackbar from './components/utility/UniversalSnackbar';
 
 const initialLoad = {
   start: { opacity: 0 },
@@ -49,6 +50,7 @@ const App = () => {
         </Routes>
       </Box>
       <Footer />
+      <UniversalSnackbar />
     </motion.div>
   );
 };
