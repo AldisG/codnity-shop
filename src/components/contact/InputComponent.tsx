@@ -17,6 +17,7 @@ const InputComponent: FC<P> = ({
   const [input, setinput] = useState('');
   const [isValid, setIsValid] = useState(false);
   const [dirty, setDirty] = useState(false);
+  const minCharacterLength = 3;
 
   useEffect(() => {
     setinput('');
@@ -28,18 +29,25 @@ const InputComponent: FC<P> = ({
   const isThisLastNameField = inputNameFixed === 'lastname';
   const cherryPickEmail = inputName.toLowerCase().split(' ')[0] === 'email';
 
+  const handleBlur = () => {
+    if (input.length > 0) {
+      setDirty(true);
+    } else {
+      setDirty(false);
+    }
+  };
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setinput(e.target.value);
-    if (input.length > 3) {
+    if (input.length > minCharacterLength) {
       if (cherryPickEmail) {
-        const emailRegex = /^\S+@\S+\.\S+$/
+        const emailRegex = /^\S+@\S+\.\S+$/;
         setIsValid(emailRegex.test(input));
         return;
       }
       setIsValid(true);
-      setDirty(false)
     } else {
       setIsValid(false);
     }
@@ -51,7 +59,7 @@ const InputComponent: FC<P> = ({
         name={inputNameFixed}
         error={dirty && !isValid}
         value={input}
-        onBlur={() => setDirty(true)}
+        onBlur={handleBlur}
         onChange={handleChange}
         required={!isThisLastNameField}
         fullWidth

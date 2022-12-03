@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { FC } from 'react';
-import { formatedNumb } from '../../utility/formatPrice';
+import { formatedPrice } from '../../utility/formatPrice';
 
 type P = {
   fakeNew: number;
@@ -20,7 +20,7 @@ const PriceInfoWrapper: FC<P> = ({ fakeNew, price }) => {
           fontSize: 28,
         }}
       >
-        ${formatedNumb(price)}
+        ${formatedPrice(price)}
       </Typography>
     </Box>
   );

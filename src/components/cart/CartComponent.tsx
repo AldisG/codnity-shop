@@ -7,6 +7,8 @@ import { setShowSnackbar } from '../../store/slices/showSnackbarSlice';
 import ActionButton from '../utility/ActionButton';
 import CloseButton from '../utility/CloseButton';
 import CartTableHead from './CartTableHead';
+import { formatedPrice } from '../../components/utility/formatPrice';
+import TotalPrice from './TotalPrice';
 
 type P = {
   cartOpen: boolean;
@@ -45,6 +47,7 @@ const CartComponent: FC<P> = ({ cartOpen, setCartOpen }) => {
       dispatch(removeAllItems());
     }
   };
+
   return (
     <Dialog onClose={() => setCartOpen(false)} open={cartOpen} maxWidth="xl">
       <CloseButton onClick={setCartOpen} />
@@ -58,20 +61,7 @@ const CartComponent: FC<P> = ({ cartOpen, setCartOpen }) => {
             <CartTableHead />
           </Box>
         </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            alignItems: 'flex-end',
-            gap: 1,
-            pt: 2,
-          }}
-        >
-          <Typography component="div">Total:</Typography>
-          <Typography component="span" variant="h5" fontWeight="bold">
-            {99}$ {/* ADAPTIVE PRICE */}
-          </Typography>
-        </Box>
+        <TotalPrice userCartContents={userCartContents} />
 
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <ActionButton
@@ -81,7 +71,11 @@ const CartComponent: FC<P> = ({ cartOpen, setCartOpen }) => {
             caution={true}
             simpleFunc={handleRemoveAllItems}
           />
-          <ActionButton text="Purchase" simpleFunc={handlePurchaseItems} />
+          <ActionButton
+            text="Purchase"
+            disabled={!userCartContents.length}
+            simpleFunc={handlePurchaseItems}
+          />
         </Box>
       </DialogContent>
     </Dialog>

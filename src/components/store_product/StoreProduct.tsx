@@ -6,7 +6,7 @@ import { Button, Container, Grid, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import LoadingItems from '../store_page/store_components/LoadingItems';
 import Ratings from '../store_page/store_components/Ratings';
-import { formatedNumb } from '../utility/formatPrice';
+import { formatedPrice } from '../utility/formatPrice';
 import LargeBtn from '../utility/LargeBtn';
 import { StoreItemType } from '../../store/types';
 import ProductNotFound from './ProductNotFound';
@@ -85,7 +85,7 @@ const StoreProduct = () => {
               {title}
             </Typography>
             <Typography component="div" variant="h5" fontWeight={900}>
-              $ {formatedNumb(price)}
+              $ {formatedPrice(price)}
             </Typography>
             <Box
               sx={{

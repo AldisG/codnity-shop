@@ -5,10 +5,10 @@ import { useNavigate } from 'react-router-dom';
 
 type P = {
   text: string;
-  disabled?: boolean;
   goTo?: string;
   lowAccent?: boolean;
   caution?: boolean;
+  disabled?: boolean;
   simpleFunc?: () => void | undefined;
 };
 

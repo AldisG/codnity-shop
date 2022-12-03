@@ -1,6 +1,8 @@
 import { Backdrop, CircularProgress, Snackbar } from '@mui/material';
 import React, { FC, useState } from 'react';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import { useDispatch } from 'react-redux';
+import { setShowSnackbar } from '../../store/slices/showSnackbarSlice';
 
 type P = {
   showLoading: boolean;
@@ -15,9 +17,17 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 });
 
 const BackdropLoading: FC<P> = ({ showLoading, setShowLoading }) => {
+  const dispatch = useDispatch();
   const startSnackbarTimer = () => {
     const timer = setTimeout(() => {
       setShowLoading(false);
+      dispatch(
+        setShowSnackbar({
+          open: true,
+          text: 'Email has been sent!',
+          caution: false,
+        })
+      );
     }, 1100);
     timer;
     return () => {
