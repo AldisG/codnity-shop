@@ -10,7 +10,6 @@ const openMpdalSlice = createSlice({
   reducers: {
     openModal: (state, { payload }: { payload: boolean }) => {
       state.openModal = payload;
-      console.log(state.openModal);
     },
   },
 });
