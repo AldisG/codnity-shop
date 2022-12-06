@@ -4,13 +4,13 @@ import { FC } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 
 type P = {
-  onClick: (value: boolean) => void;
+  onClick: () => void;
 };
 
 const CloseButton: FC<P> = ({ onClick }) => {
   return (
     <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-      <Button onClick={() => onClick(false)} sx={{ width: 'max-content' }}>
+      <Button onClick={onClick} sx={{ width: 'max-content' }}>
         <AiOutlineClose size={33} />
       </Button>
     </Box>

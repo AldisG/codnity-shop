@@ -1,11 +1,12 @@
 import { Dialog, DialogContent, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/redux/hooks';
 import { removeAllItems } from '../../store/slices/cartProductsSlice';
 import { setShowSnackbar } from '../../store/slices/showSnackbarSlice';
 import ActionButton from '../utility/ActionButton';
 import CloseButton from '../utility/CloseButton';
+import MessageModal from '../utility/MessageModal';
 import CartTableHead from './CartTableHead';
 import TotalPrice from './TotalPrice';
 
@@ -27,13 +28,13 @@ const tableContainerStyle = {
 };
 
 const CartComponent: FC<P> = ({ cartOpen, setCartOpen }) => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const dispatch = useAppDispatch();
+
   const userCartContents = useAppSelector(
     ({ cartProductsSlice }) => cartProductsSlice.userCart
   );
-  const handlePurchaseItems = () => {
-    alert('create success modal, clear cart list, send to store page');
-  };
+
   const handleRemoveAllItems = () => {
     if (userCartContents.length > 0) {
       dispatch(
@@ -46,10 +47,26 @@ const CartComponent: FC<P> = ({ cartOpen, setCartOpen }) => {
       dispatch(removeAllItems());
     }
   };
-
+  const handleCloseCart = () => {
+    setCartOpen(false);
+  };
+  const handleCloseModal = () => {
+    setModalIsOpen(false);
+  };
+  const handlePurchaseItems = () => {
+    setModalIsOpen(true);
+    dispatch(removeAllItems());
+    dispatch(
+      setShowSnackbar({
+        open: true,
+        text: 'Purchase complete!',
+        caution: false,
+      })
+    );
+  };
   return (
     <Dialog onClose={() => setCartOpen(false)} open={cartOpen} maxWidth="xl">
-      <CloseButton onClick={setCartOpen} />
+      <CloseButton onClick={handleCloseCart} />
 
       <DialogContent sx={{ pt: 0 }}>
         <Typography variant="h4">Your cart</Typography>
@@ -75,6 +92,11 @@ const CartComponent: FC<P> = ({ cartOpen, setCartOpen }) => {
           />
         </Box>
       </DialogContent>
+      <MessageModal
+        modalIsOpen={modalIsOpen}
+        handleClose={handleCloseModal}
+        purchased
+      />
     </Dialog>
   );
 };

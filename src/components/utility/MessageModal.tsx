@@ -1,18 +1,24 @@
-import { Dialog, DialogContent, Typography } from '@mui/material';
-import { useState } from 'react';
+import { Dialog } from '@mui/material';
+import CloseButton from './CloseButton';
+import ContentForEmailSubmission from './ContentForEmailSubmission';
+import ContentForItemsPurchased from './ContentForItemsPurchased';
 
-const MessageModal = () => {
-  const [cartOpen, setCartOpen] = useState(true);
+type P = {
+  modalIsOpen: boolean;
+  handleClose: () => void;
+  purchased?: boolean;
+};
+
+const MessageModal = ({ modalIsOpen, handleClose, purchased }: P) => {
+  const closeModalTimer = setTimeout(() => {
+    handleClose();
+    return () => clearTimeout(closeModalTimer);
+  }, 9000);
+
   return (
-    <Dialog onClose={() => setCartOpen(false)} open={cartOpen} maxWidth="xl">
-      <DialogContent sx={{ pt: 0 }}>
-        <Typography component="div" variant="h3">
-          Thank you!
-        </Typography>
-        <Typography component="div" variant="body1">
-          Your message has been sent!
-        </Typography>
-      </DialogContent>
+    <Dialog onClose={handleClose} open={modalIsOpen} maxWidth="lg">
+      <CloseButton onClick={handleClose} />
+      {purchased ? <ContentForItemsPurchased /> : <ContentForEmailSubmission />}
     </Dialog>
   );
 };
