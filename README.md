@@ -1,19 +1,12 @@
-# React boilerplate
+# Shop with fake API items
 
-### It contains:
+This project is made with React, TypeScript, ReduxToolkit, React Router, MUI5, basic FramerMotion transitions.
+API doesn't require API key, so this project will work with no issues, as long as API DB is up and running.
+"Buying" items and "sending email" is just a placeholder.
 
-- [✔️] React + TypeScript
-- [✔️] Redux Toolkit + with types via useAppSelector / useAppDispatch
-- [✔️] Create Api
-- [✔️] Route
-- [✔️] React Testing Library and Jest
-- [✔️] Webpack setup
-- [✔️] Framer Motion
-- [✔️] ESLint and Prettier setup (plugins still required)
+- To run the project
 
-* To run the project - npm start
-* To run tests - npm run test
+1. npm i
+2. npm start
 
----
-
-<small>Project uses LF by default</small>
+<small>Project uses CRLF by default</small>
