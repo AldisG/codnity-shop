@@ -18,7 +18,6 @@ const CartWrapper = () => {
         aria-label="Check your shopping cart"
         sx={{ display: 'flex', color: '#fff', py: 0.2 }}
         onClick={() => {
-          console.log('clicked');
           setCartOpen(true);
         }}
       >

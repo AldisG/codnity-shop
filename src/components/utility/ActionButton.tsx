@@ -20,10 +20,6 @@ const ActionButton: FC<P> = ({
   caution,
   simpleFunc,
 }) => {
-  // this func also need to be a prop
-  const handleDeleteCart = () => {
-    console.log('IMPLEMENT DELETE CART ITEMS');
-  };
   const navigate = useNavigate();
   return (
     <Box paddingTop={4}>
@@ -31,7 +27,6 @@ const ActionButton: FC<P> = ({
         variant={lowAccent ? 'text' : 'contained'}
         size={lowAccent ? 'small' : 'large'}
         disabled={disabled}
-        // @ts-ignore
         sx={{
           color: (t) => (caution ? t.palette.warning.main : t.palette.primary),
         }}
@@ -39,9 +34,6 @@ const ActionButton: FC<P> = ({
           if (goTo) {
             navigate(goTo);
             return;
-          }
-          if (lowAccent) {
-            handleDeleteCart();
           }
           if (simpleFunc) {
             simpleFunc();

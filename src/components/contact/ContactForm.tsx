@@ -1,10 +1,11 @@
 import { FC, useState } from 'react';
-import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import InputComponent from './InputComponent';
 import CheckboxComponent from './CheckboxComponent';
+import MessageModal from '../utility/MessageModal';
+import SubmitButton from './SubmitButton';
 
 const inputNames = ['First Name', 'Last Name', 'Email Address', 'Message'];
 const checkboxes = [
@@ -25,9 +26,15 @@ type P = {
 
 const ContactForm: FC<P> = ({ setShowLoading }) => {
   const [messageSubmitted, setMessageSubmitted] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const handleClose = () => {
+    setModalIsOpen(false);
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setModalIsOpen(true);
     setMessageSubmitted(true);
     setShowLoading(true);
   };
@@ -63,19 +70,9 @@ const ContactForm: FC<P> = ({ setShowLoading }) => {
             ))}
           </Box>
         </Grid>
-        <Button
-          type="submit"
-          variant="contained"
-          fullWidth
-          sx={{
-            mt: 3,
-            mb: 2,
-            py: 1.2,
-          }}
-        >
-          Send Message
-        </Button>
+        <SubmitButton />
       </Box>
+      <MessageModal modalIsOpen={modalIsOpen} handleClose={handleClose} />
     </Box>
   );
 };

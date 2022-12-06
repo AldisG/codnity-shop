@@ -8,6 +8,7 @@ type Props = {
     route: string;
   };
   vertical?: boolean;
+  pathname: string;
 };
 
 const verticalStyle = {
@@ -19,12 +20,16 @@ const horizontalStyle = {
   color: '#fff',
 };
 
-const NavigationBtn: FC<Props> = ({ link, vertical }) => {
+const NavigationBtn: FC<Props> = ({ link, vertical, pathname }) => {
   const { name, route } = link;
+  const cleanPathName = pathname.replace('/', '').toLowerCase();
+  const currentPage = !cleanPathName ? 'home' : cleanPathName;
+  const fontWeight = name.toLowerCase() === currentPage ? 'bold' : 'regular';
+
   return (
     <Link to={route}>
       <Button variant="text" sx={vertical ? verticalStyle : horizontalStyle}>
-        <Typography>{name}</Typography>
+        <Typography fontWeight={fontWeight}>{name}</Typography>
       </Button>
     </Link>
   );

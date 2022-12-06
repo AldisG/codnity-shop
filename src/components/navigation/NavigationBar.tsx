@@ -5,6 +5,7 @@ import Logo from '../utility/Logo';
 import CartWrapper from '../cart/CartWrapper';
 import { Container } from '@mui/system';
 import Drawer from './Drawer';
+import { useLocation } from 'react-router-dom';
 
 const showHamburgerMenu = {
   display: {

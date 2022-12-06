@@ -1,5 +1,4 @@
 import { Drawer as DrawerMui } from '@mui/material';
-import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/redux/hooks';
 import { openModal } from '../../store/slices/openModalSlice';
 import CloseButton from '../utility/CloseButton';

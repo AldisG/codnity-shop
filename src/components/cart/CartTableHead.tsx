@@ -29,7 +29,6 @@ const CartTableHead = () => {
             ))}
           </TableRow>
         </TableHead>
-        {/* rows map */}
         <CartTableBody />
       </Table>
     </Box>

@@ -1,5 +1,5 @@
 import { Checkbox, FormControlLabel, Grid } from '@mui/material';
-import { FC, useState, useEffect } from 'react';
+import { FC, useState } from 'react';
 
 type P = {
   value: string;
