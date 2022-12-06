@@ -4,6 +4,7 @@ import EmptyTableRow from './EmptyTableRow';
 import RemoveButton from './RemoveButton';
 import { removeAnItem } from '../../store/slices/cartProductsSlice';
 import { setShowSnackbar } from '../../store/slices/showSnackbarSlice';
+import CartTableCell from './CartTableCell';
 
 const CartTableBody = () => {
   const dispatch = useAppDispatch();
@@ -33,14 +34,12 @@ const CartTableBody = () => {
             key={`${title}${i}`}
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
           >
-            <TableCell component="th" scope="row">
-              {title}
-            </TableCell>
-            <TableCell align="right">{price}</TableCell>
-            <TableCell align="right">{amount}</TableCell>
-            <TableCell align="right">
+            <CartTableCell first>{title}</CartTableCell>
+            <CartTableCell>{price}</CartTableCell>
+            <CartTableCell>{amount}</CartTableCell>
+            <CartTableCell>
               <RemoveButton onClick={handleRemoveItem} itemId={id} />
-            </TableCell>
+            </CartTableCell>
           </TableRow>
         ))}
       </TableBody>
