@@ -1,54 +1,56 @@
 import './App.scss';
-import LOGO from './img/react.png';
 import { Routes, Route } from 'react-router-dom';
-// import { useGetAnyDataQuery } from './store/services/storeApiCalls';
 import { motion } from 'framer-motion';
+import Home from './pages/Home';
+import StorePage from './pages/StorePage';
+import Contact from './pages/Contact';
+import Product from './pages/Product';
+import PageNotFound from './pages/PageNotFound';
+import { useEffect } from 'react';
+import NavigationBar from './components/navigation/NavigationBar';
+import Footer from './components/footer/Footer';
+import { Box } from '@mui/system';
+import { useAppDispatch, useAppSelector } from './store/redux/hooks';
+import { useGetStoreItemsQuery } from './store/services/storeApiCalls';
+import { initiateStoreCall } from './store/slices/storeProductsSlice';
+import UniversalSnackbar from './components/utility/UniversalSnackbar';
 
-const test = {
+const initialLoad = {
   start: { opacity: 0 },
   end: { opacity: 1 },
 };
 
 const App = () => {
-  // const { data, error, isLoading, isError } = useGetAnyDataQuery(undefined);
-  const app = 'app';
+  const dispatch = useAppDispatch();
+  const { data, isError, isLoading, isSuccess, isFetching } =
+    useGetStoreItemsQuery('');
+
+  useEffect(() => {
+    dispatch(
+      initiateStoreCall({ data, isError, isLoading, isSuccess, isFetching })
+    );
+  }, [data]);
 
   return (
     <motion.div
-      variants={test}
-      initial={test.start}
-      animate={test.end}
-      onClick={() => console.log('!')}
+      variants={initialLoad}
+      initial={initialLoad.start}
+      animate={initialLoad.end}
+      transition={{ duration: 1 }}
       className="App"
     >
-      <h1>{app}</h1>
-      <p>Working with: {process.env.NODE_ENV} webpack</p>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <hr />
-              <h3>This is displayed as a Route</h3>
-              <img className="logo" src={LOGO} alt={LOGO} width={200} />
-              <hr />
-              <ul>
-                <b>I contain :</b>
-                <li>React</li>
-                <li>TS</li>
-                <li>ReduxToolkit</li>
-                <li>React Testing Library and Jest</li>
-                <li>CreateApi</li>
-                <li>Framer Motion</li>
-                <li>ESLint</li>
-                <li>Prittier</li>
-                <li>Webpack</li>
-              </ul>
-              <hr />
-            </>
-          }
-        />
-      </Routes>
+      <NavigationBar />
+      <Box sx={{ minHeight: '95vh' }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/store" element={<StorePage />} />
+          <Route path="/store/:id" element={<Product />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </Box>
+      <Footer />
+      <UniversalSnackbar />
     </motion.div>
   );
 };
